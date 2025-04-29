@@ -34,7 +34,8 @@ const ContainerBanner = () => {
           {filme.dados.overview}
         </p>
         <button
-          className="bg-white cursor-pointer hover:bg-gray-200 drop-shadow-md drop-shadow-black flex items-center gap-1 text-black px-3 text-lg py-2 md:px-5 md:text-xl md:py-3 rounded-input font-semibold"
+          style={{ transitionDuration: '.2s' }}
+          className="bg-white cursor-pointer hover:bg-primary hover:text-white drop-shadow-md drop-shadow-black flex items-center gap-1 text-black px-3 text-lg py-2 md:px-5 md:text-xl md:py-3 rounded-input font-semibold"
           onClick={() => {
             route.push(`/filme?id=${filme.id}`);
           }}

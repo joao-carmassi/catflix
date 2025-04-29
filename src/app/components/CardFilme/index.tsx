@@ -14,7 +14,7 @@ const CardFilme = ({ filme }: Props) => {
       <img
         className="w-full h-32 md:h-40 rounded-card object-cover object-center"
         src={`https://image.tmdb.org/t/p/w500${filme.dados.backdrop_path}`}
-        alt="Card Image"
+        alt={`Card do filme ${filme.nome}`}
       />
       <div
         style={{ transitionDuration: '.1s' }}
