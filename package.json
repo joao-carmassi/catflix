@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "npx concurrently \"next dev --turbopack\" \"npx json-server src/db.json -p 3001\" \"cd backend && npm run filmes\"",
+    "dev": "npx concurrently \"next dev --turbopack\" \"npx json-server src/db.json -p 3001\"",
     "build": "next build",
     "start": "next start",
     "lint": "next lint",

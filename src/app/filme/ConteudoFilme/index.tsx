@@ -14,7 +14,7 @@ const ConteudoFilme = () => {
         {filme?.nome}
       </h1>
       <section className="w-full">
-        <video controls>
+        <video controls className="w-full">
           <source
             src={`https://api-catflix.loca.lt/${filme?.caminho}`}
             type="video/webm"
