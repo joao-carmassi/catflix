@@ -1,15 +1,25 @@
 'use client';
 
+import { HTTP } from '@/http/axios';
 import { IFilme } from '@/interface/IFilme';
 import { useSearchParams } from 'next/navigation';
+import { useEffect, useState } from 'react';
 
-interface Props {
-  filmes: IFilme[];
-}
-
-const ConteudoFilme = ({ filmes }: Props) => {
+const ConteudoFilme = () => {
   const searchParams = useSearchParams();
   const id = searchParams.get('id');
+
+  const [filmes, setFilmes] = useState<IFilme[] | null>(null);
+
+  useEffect(() => {
+    HTTP.serverFilmesApi
+      .get('')
+      .then((res) => setFilmes(res.data.data as IFilme[]))
+      .catch((err) => console.error(err));
+  }, []);
+
+  if (filmes === null) return null;
+
   const filme = filmes.find((filme) => Number(filme.id) === Number(id));
 
   return (

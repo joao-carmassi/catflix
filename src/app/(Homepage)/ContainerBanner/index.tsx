@@ -1,18 +1,25 @@
+'use client';
+
 import styles from './ContanerBanner.module.css';
 import { IFilme } from '@/interface/IFilme';
 import { HTTP } from '@/http/axios';
 import Link from 'next/link';
+import { useEffect, useState } from 'react';
 
-const ContainerBanner = async () => {
-  const filmes = await HTTP.serverFilmesApi.get('').then((response) => {
-    console.log(response.data.data);
-    return response.data.data as IFilme[];
-  });
+const ContainerBanner = () => {
+  const [filmes, setFilmes] = useState<IFilme[] | null>(null);
+
+  useEffect(() => {
+    HTTP.serverFilmesApi
+      .get('')
+      .then((res) => setFilmes(res.data.data as IFilme[]))
+      .catch((err) => console.error(err));
+  }, []);
+
+  if (filmes === null) return null;
 
   const random = Math.floor(Math.random() * filmes.length);
   const filme = filmes[random];
-
-  if (!filme) return null;
 
   return (
     <section className="h-svh relative max-h-[60rem] z-0">
@@ -36,7 +43,7 @@ const ContainerBanner = async () => {
         <Link
           style={{ transitionDuration: '.2s' }}
           className="bg-white cursor-pointer hover:bg-primary hover:text-white drop-shadow-md drop-shadow-black flex items-center gap-1 text-black px-3 text-lg py-2 md:px-5 md:text-xl md:py-3 rounded-input font-semibold"
-          href={`/filme/${filme.id}`}
+          href={`/filme/?id=${filme.id}`}
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
