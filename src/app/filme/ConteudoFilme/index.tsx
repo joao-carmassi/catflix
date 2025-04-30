@@ -1,12 +1,16 @@
 'use client';
 
-import filmes from '@/db.json';
+import { IFilme } from '@/interface/IFilme';
 import { useSearchParams } from 'next/navigation';
 
-const ConteudoFilme = () => {
+interface Props {
+  filmes: IFilme[];
+}
+
+const ConteudoFilme = ({ filmes }: Props) => {
   const searchParams = useSearchParams();
   const id = searchParams.get('id');
-  const filme = filmes.data.find((filme) => Number(filme.id) === Number(id));
+  const filme = filmes.find((filme) => Number(filme.id) === Number(id));
 
   return (
     <>

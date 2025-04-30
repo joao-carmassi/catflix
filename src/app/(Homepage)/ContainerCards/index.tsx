@@ -1,11 +1,16 @@
 import CardFilme from '@/app/components/CardFilme';
-import filmes from '@/db.json';
+import { HTTP } from '@/http/axios';
+import { IFilme } from '@/interface/IFilme';
 
-const ContainerCard = () => {
+const ContainerCard = async () => {
   const setGeneros = new Set();
   let generos: string[] = [];
 
-  filmes.data.forEach((filme) => {
+  const filmes = await HTTP.serverFilmesApi.get('').then((response) => {
+    return response.data.data as IFilme[];
+  });
+
+  filmes.forEach((filme) => {
     filme.dados.genres.forEach((genero) => {
       setGeneros.add(genero.name);
     });
@@ -40,7 +45,7 @@ const ContainerCard = () => {
               <div className="hs-carousel w-full overflow-hidden">
                 <div className="relative h-32 md:h-40 -mx-1">
                   <div className="hs-carousel-body absolute top-0 bottom-0 start-0 flex flex-nowrap opacity-0 cursor-grab transition-transform duration-700 hs-carousel-dragging:transition-none hs-carousel-dragging:cursor-grabbing">
-                    {filmes.data
+                    {filmes
                       .filter((filme) =>
                         filme.dados.genres.some((item) => item.name === genero)
                       )

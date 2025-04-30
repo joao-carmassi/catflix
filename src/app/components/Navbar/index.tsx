@@ -42,7 +42,7 @@ const Navbar = () => {
           >
             <img
               className="h-full bg-white rounded-md"
-              src={`${process.env.BASE_URL}/favicon.ico`}
+              src={`${process.env.BASE_URL || ''}/favicon.ico`}
               alt="Logo do site"
             />
             Catflix

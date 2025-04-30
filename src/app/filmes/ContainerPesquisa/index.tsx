@@ -1,15 +1,18 @@
 'use client';
 
 import CardFilme from '@/app/components/CardFilme';
-import filmes from '@/db.json';
 import { IFilme } from '@/interface/IFilme';
 import { useSearchParams } from 'next/navigation';
 
-const ContainerPesquisa = () => {
+interface Props {
+  filmes: IFilme[];
+}
+
+const ContainerPesquisa = ({ filmes }: Props) => {
   const searchParams = useSearchParams();
   const nome = searchParams.get('nome') as string;
 
-  const filmesFiltrados = filmes.data
+  const filmesFiltrados = filmes
     .filter((filme: IFilme) => {
       const nomeMatch = filme?.nome?.toLowerCase().includes(nome.toLowerCase());
       const produtoraMatch = filme?.dados?.production_companies?.some(

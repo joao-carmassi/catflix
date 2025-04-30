@@ -1,19 +1,16 @@
-'use client';
-
-import { useRouter } from 'next/navigation';
 import styles from './ContanerBanner.module.css';
-import filmes from '@/db.json';
-import { useEffect, useState } from 'react';
 import { IFilme } from '@/interface/IFilme';
+import { HTTP } from '@/http/axios';
+import Link from 'next/link';
 
-const ContainerBanner = () => {
-  const route = useRouter();
-  const [filme, setFilme] = useState(null as IFilme | null);
+const ContainerBanner = async () => {
+  const filmes = await HTTP.serverFilmesApi.get('').then((response) => {
+    console.log(response.data.data);
+    return response.data.data as IFilme[];
+  });
 
-  useEffect(() => {
-    const random = Math.floor(Math.random() * filmes.data.length);
-    setFilme(filmes.data[random]);
-  }, []);
+  const random = Math.floor(Math.random() * filmes.length);
+  const filme = filmes[random];
 
   if (!filme) return null;
 
@@ -30,15 +27,16 @@ const ContainerBanner = () => {
         <h2 className="capitalize drop-shadow-md drop-shadow-black font-semibold text-3xl md:text-5xl lg:text-7xl">
           {filme.nome}
         </h2>
-        <p className="text-xl hidden md:block md:w-1/2 drop-shadow-md drop-shadow-black">
+        <p className="text-xl hidden lg:block md:w-1/2 drop-shadow-md drop-shadow-black">
           {filme.dados.overview}
         </p>
-        <button
+        <p className="text-xl  block lg:hidden md:w-1/2 drop-shadow-md drop-shadow-black">
+          {filme.dados.tagline}
+        </p>
+        <Link
           style={{ transitionDuration: '.2s' }}
           className="bg-white cursor-pointer hover:bg-primary hover:text-white drop-shadow-md drop-shadow-black flex items-center gap-1 text-black px-3 text-lg py-2 md:px-5 md:text-xl md:py-3 rounded-input font-semibold"
-          onClick={() => {
-            route.push(`/filme?id=${filme.id}`);
-          }}
+          href={`/filme/${filme.id}`}
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -51,7 +49,7 @@ const ContainerBanner = () => {
             <path d="M6 4v16a1 1 0 0 0 1.524 .852l13 -8a1 1 0 0 0 0 -1.704l-13 -8a1 1 0 0 0 -1.524 .852z"></path>
           </svg>
           Assistir
-        </button>
+        </Link>
       </div>
     </section>
   );
