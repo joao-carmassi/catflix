@@ -31,9 +31,10 @@ const Navbar = () => {
     setLoaded(true);
   }, []);
 
-  const path = process.env.BASE_URL;
-
   if (!loaded) return null;
+
+  const path = process.env.NEXT_PUBLIC_BASE_URL;
+  console.log(path);
 
   return (
     <header>
