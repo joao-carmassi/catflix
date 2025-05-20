@@ -26,12 +26,12 @@ const Navbar = () => {
     router.push(`/filmes?nome=${path}`);
   };
 
-  const path = process.env.BASE_URL || '';
-
   const [loaded, setLoaded] = useState(false);
   useEffect(() => {
     setLoaded(true);
   }, []);
+
+  const path = process.env.BASE_URL;
 
   if (!loaded) return null;
 
