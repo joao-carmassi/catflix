@@ -6,17 +6,30 @@ import CardFilme from '@/components/CardFilme';
 import { HTTP } from '@/service/axios';
 import { IFilme } from '@/interface/IFilme';
 import ContainerLoading from '@/components/ContainerLoading';
+import { notFound } from 'next/navigation';
 
 const ContainerPesquisa = () => {
   const [filmes, setFilmes] = useState<IFilme[] | null>(null);
+  const [loading, setLoading] = useState(true);
+  const [erro, setErro] = useState(false);
+
   const searchParams = useSearchParams();
   const nome = searchParams.get('nome')?.toLowerCase() || '';
 
   useEffect(() => {
     HTTP.dataFilmes
       .get('/data')
-      .then((res) => setFilmes(res.data as IFilme[]))
-      .catch((err) => console.error(err))
+      .then((res) => {
+        if (!res.data || res.data.length === 0) {
+          setErro(true);
+        } else {
+          setFilmes(res.data as IFilme[]);
+        }
+      })
+      .catch((err) => {
+        console.error(err);
+        setErro(true);
+      })
       .finally(() => setLoading(false));
   }, []);
 
@@ -36,11 +49,8 @@ const ContainerPesquisa = () => {
       .sort((a, b) => a.nome.localeCompare(b.nome));
   }, [filmes, nome]);
 
-  const [loading, setLoading] = useState(true);
-  if (loading) {
-    return <ContainerLoading pageSize="min-h-container" />;
-  }
-
+  if (loading) return <ContainerLoading pageSize="min-h-container" />;
+  if (erro) return notFound();
   if (!filmes) return null;
 
   return (
