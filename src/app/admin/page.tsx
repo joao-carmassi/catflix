@@ -1,7 +1,7 @@
 'use client';
 
-import { HTTP } from '@/http/axios';
-import InputPesquisa from '../components/InputBusca';
+import { HTTP } from '@/service/axios';
+import InputPesquisa from '../../components/InputBusca';
 import Form from './form';
 import { IFilme, IFilmeApi } from '@/interface/IFilme';
 

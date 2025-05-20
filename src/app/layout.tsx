@@ -1,8 +1,7 @@
 import type { Metadata } from 'next';
-import '@/styles/globals.css';
-import PrelineScriptWrapper from './components/PrelineScriptWrapper';
-import Navbar from './components/Navbar';
-import Footer from './components/Footer';
+import './globals.css';
+import Navbar from '../components/Navbar';
+import Footer from '../components/Footer';
 
 export const metadata: Metadata = {
   title: 'Catflix',
@@ -16,12 +15,11 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="pt-BR">
-      <body className="bg-base-200">
+      <body className="dark">
         <Navbar />
         {children}
         <Footer />
       </body>
-      <PrelineScriptWrapper />
     </html>
   );
 }

@@ -17,12 +17,12 @@ const localApi = axios.create({
 });
 
 // API NPOINT -----------------------------------------
-const serverFilmesApi = axios.create({
-  baseURL: 'https://api.npoint.io/3cdd331f32dedfb6a372',
+const dataFilmes = axios.create({
+  baseURL: 'https://api-catflix.loca.lt',
 });
 
 export const HTTP = {
   filmesApi,
   localApi,
-  serverFilmesApi,
+  dataFilmes,
 };

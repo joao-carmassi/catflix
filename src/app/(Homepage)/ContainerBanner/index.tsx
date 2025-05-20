@@ -1,22 +1,17 @@
 'use client';
 
+import { Button } from '@/components/ui/button';
 import styles from './ContanerBanner.module.css';
+import { useRouter } from 'next/navigation';
 import { IFilme } from '@/interface/IFilme';
-import { HTTP } from '@/http/axios';
-import Link from 'next/link';
-import { useEffect, useState } from 'react';
+import slugify from 'slugify';
 
-const ContainerBanner = () => {
-  const [filmes, setFilmes] = useState<IFilme[] | null>(null);
+interface Props {
+  filmes: IFilme[];
+}
 
-  useEffect(() => {
-    HTTP.serverFilmesApi
-      .get('')
-      .then((res) => setFilmes(res.data.data as IFilme[]))
-      .catch((err) => console.error(err));
-  }, []);
-
-  if (filmes === null) return null;
+const ContainerBanner = ({ filmes }: Props) => {
+  const router = useRouter();
 
   const random = Math.floor(Math.random() * filmes.length);
   const filme = filmes[random];
@@ -29,21 +24,36 @@ const ContainerBanner = () => {
         alt=""
       />
       <div
-        className={`${styles.banner} absolute flex top-0 flex-col w-full gap-3 md:gap-5 h-full items-start justify-center px-5 md:px-20 text-white`}
+        className={`${styles.banner} absolute flex top-0 flex-col w-full gap-3 h-full items-start justify-center px-5 md:px-20 text-white`}
       >
-        <h2 className="capitalize drop-shadow-md drop-shadow-black font-semibold text-3xl md:text-5xl lg:text-7xl">
+        <h2 className="capitalize drop-shadow-md drop-shadow-black/80 font-semibold text-3xl md:text-5xl lg:text-7xl">
           {filme.nome}
         </h2>
-        <p className="text-xl hidden lg:block md:w-1/2 drop-shadow-md drop-shadow-black">
+        <ul className="flex font-semibold gap-3">
+          {filme.dados.genres.map((item, index) => (
+            <li className="drop-shadow-sm drop-shadow-black/80" key={item.name}>
+              {item.name}
+              {filme.dados.genres.length - 1 === index ? '' : ','}
+            </li>
+          ))}
+        </ul>
+        <p className="text-xl hidden lg:block md:w-1/2 drop-shadow-sm drop-shadow-black/80">
           {filme.dados.overview}
         </p>
-        <p className="text-xl  block lg:hidden md:w-1/2 drop-shadow-md drop-shadow-black">
+        <p className="text-xl  block lg:hidden md:w-1/2 drop-shadow-sm drop-shadow-black/80">
           {filme.dados.tagline}
         </p>
-        <Link
-          style={{ transitionDuration: '.2s' }}
-          className="bg-white cursor-pointer hover:bg-primary hover:text-white drop-shadow-md drop-shadow-black flex items-center gap-1 text-black px-3 text-lg py-2 md:px-5 md:text-xl md:py-3 rounded-input font-semibold"
-          href={`/filme/?id=${filme.id}`}
+        <Button
+          onClick={() =>
+            router.push(
+              `/filme?nome=${slugify(filme.nome, {
+                lower: true,
+                strict: true,
+              })}`
+            )
+          }
+          variant="white"
+          size="xl"
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -56,7 +66,7 @@ const ContainerBanner = () => {
             <path d="M6 4v16a1 1 0 0 0 1.524 .852l13 -8a1 1 0 0 0 0 -1.704l-13 -8a1 1 0 0 0 -1.524 .852z"></path>
           </svg>
           Assistir
-        </Link>
+        </Button>
       </div>
     </section>
   );

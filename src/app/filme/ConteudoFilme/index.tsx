@@ -1,42 +1,12 @@
-'use client';
-
-import { HTTP } from '@/http/axios';
 import { IFilme } from '@/interface/IFilme';
-import { useSearchParams } from 'next/navigation';
-import { useEffect, useState } from 'react';
 
-const ConteudoFilme = () => {
-  const searchParams = useSearchParams();
-  const id = searchParams.get('id');
+interface Props {
+  filme: IFilme;
+}
 
-  const [filmes, setFilmes] = useState<IFilme[] | null>(null);
-
-  useEffect(() => {
-    HTTP.serverFilmesApi
-      .get('')
-      .then((res) => setFilmes(res.data.data as IFilme[]))
-      .catch((err) => console.error(err));
-  }, []);
-
-  if (filmes === null) return null;
-
-  const filme = filmes.find((filme) => Number(filme.id) === Number(id));
-
+const DadosFilme = ({ filme }: Props) => {
   return (
-    <>
-      <h1 className="text-text text-xl md:text-3xl font-semibold">
-        {filme?.nome}
-      </h1>
-      <section className="w-full">
-        <video controls className="w-full">
-          <source
-            src={`https://api-catflix.loca.lt/${filme?.caminho}`}
-            type="video/webm"
-          />
-          Download the
-          <a href={`https://api-catflix.loca.lt/${filme?.caminho}`}>WEBM</a>
-        </video>
-      </section>
+    <section className="flex flex-col gap-5 w-full">
       <section className="mb-5 grid gap-y-3 gap-x-5 grid-flow-row grid-cols-2">
         <p className="text-text text-base md:text-lg col-span-2">
           <span className="text-text font-semibold">Description:</span>{' '}
@@ -71,8 +41,8 @@ const ConteudoFilme = () => {
             .join(', ')}
         </p>
       </section>
-    </>
+    </section>
   );
 };
 
-export default ConteudoFilme;
+export default DadosFilme;

@@ -1,4 +1,4 @@
-import InputPadrao from '@/app/components/InputPadrao';
+import InputPadrao from '@/components/InputPadrao';
 import { ChangeEvent, useState } from 'react';
 
 interface Props {

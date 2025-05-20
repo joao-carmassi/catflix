@@ -1,5 +1,7 @@
 import { IFilme } from '@/interface/IFilme';
 import Link from 'next/link';
+import 'slugify';
+import slugify from 'slugify';
 
 interface Props {
   filme: IFilme;
@@ -8,7 +10,10 @@ interface Props {
 const CardFilme = ({ filme }: Props) => {
   return (
     <Link
-      href={`/filme?id=${filme.id}`}
+      href={`/filme?nome=${slugify(filme.nome, {
+        lower: true,
+        strict: true,
+      })}`}
       className="relative shadow-2xs cursor-pointer group"
     >
       <img
@@ -18,13 +23,13 @@ const CardFilme = ({ filme }: Props) => {
       />
       <div
         style={{ transitionDuration: '.1s' }}
-        className="absolute group-hover:opacity-0 bg-card h-full rounded-card top-0 start-0 end-0"
+        className="absolute group-hover:opacity-0 bg-black/50 h-full rounded-card top-0 start-0 end-0"
       >
         <div className="p-4 md:p-5">
-          <h3 className="text-sm md:text-md lg:text-lg font-bold text-white break-words">
+          <h3 className="text-sm md:text-md lg:text-lg font-bold text-white break-words shadow-sm shadow-black/80">
             {filme.nome}
           </h3>
-          <p className="hidden md:block text-white">
+          <p className="hidden md:block text-white shadow-sm shadow-black/80">
             {filme.dados.tagline || ''}
           </p>
         </div>

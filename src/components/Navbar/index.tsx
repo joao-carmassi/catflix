@@ -26,12 +26,21 @@ const Navbar = () => {
     router.push(`/filmes?nome=${path}`);
   };
 
+  const path = process.env.BASE_URL || '';
+
+  const [loaded, setLoaded] = useState(false);
+  useEffect(() => {
+    setLoaded(true);
+  }, []);
+
+  if (!loaded) return null;
+
   return (
     <header>
       <nav
         style={{ transitionDuration: '.5s' }}
-        className={`transition-colors bg-gradient-to-b z-50 from-base-200 ${
-          scroll ? 'to-base-200' : 'to-transparent'
+        className={`transition-colors bg-gradient-to-b z-50 from-background ${
+          scroll ? 'to-background' : 'to-transparent'
         } w-full fixed px-4 md:px-14 h-18 flex items-center justify-center`}
       >
         <div className="w-full flex-1 h-full flex items-center">
@@ -42,7 +51,7 @@ const Navbar = () => {
           >
             <img
               className="h-full bg-white rounded-md"
-              src={`${process.env.BASE_URL || ''}/favicon.ico`}
+              src={`${path}/favicon.ico`}
               alt="Logo do site"
             />
             Catflix

@@ -2,9 +2,10 @@
 
 import { useSearchParams } from 'next/navigation';
 import { useEffect, useState, useMemo } from 'react';
-import CardFilme from '@/app/components/CardFilme';
-import { HTTP } from '@/http/axios';
+import CardFilme from '@/components/CardFilme';
+import { HTTP } from '@/service/axios';
 import { IFilme } from '@/interface/IFilme';
+import ContainerLoading from '@/components/ContainerLoading';
 
 const ContainerPesquisa = () => {
   const [filmes, setFilmes] = useState<IFilme[] | null>(null);
@@ -12,10 +13,11 @@ const ContainerPesquisa = () => {
   const nome = searchParams.get('nome')?.toLowerCase() || '';
 
   useEffect(() => {
-    HTTP.serverFilmesApi
-      .get('')
-      .then((res) => setFilmes(res.data.data as IFilme[]))
-      .catch((err) => console.error(err));
+    HTTP.dataFilmes
+      .get('/data')
+      .then((res) => setFilmes(res.data as IFilme[]))
+      .catch((err) => console.error(err))
+      .finally(() => setLoading(false));
   }, []);
 
   const filmesFiltrados = useMemo(() => {
@@ -34,12 +36,17 @@ const ContainerPesquisa = () => {
       .sort((a, b) => a.nome.localeCompare(b.nome));
   }, [filmes, nome]);
 
+  const [loading, setLoading] = useState(true);
+  if (loading) {
+    return <ContainerLoading pageSize="min-h-container" />;
+  }
+
   if (!filmes) return null;
 
   return (
     <section
       key={filmesFiltrados.length}
-      className="pt-18 pb-5 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-5 text-text px-5"
+      className="pb-5 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-5 text-text px-5"
     >
       {filmesFiltrados.length > 0 ? (
         filmesFiltrados.map((filme) => (

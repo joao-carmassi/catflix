@@ -1,16 +1,50 @@
 'use client';
 
-import { Suspense } from 'react';
-import ConteudoFilme from './ConteudoFilme';
+import { HTTP } from '@/service/axios';
+import { IFilme } from '@/interface/IFilme';
+import { useSearchParams } from 'next/navigation';
+import { useEffect, useState } from 'react';
+import DadosFilme from './ConteudoFilme';
+import Home from '../(Homepage)/page';
+import VideoFilme from './VideoFilme';
+import ContainerLoading from '@/components/ContainerLoading';
+import slugify from 'slugify';
 
 const PaginaFilme = () => {
+  const searchParams = useSearchParams();
+  const nome = searchParams.get('nome');
+
+  const [filmes, setFilmes] = useState<IFilme[] | null>(null);
+
+  useEffect(() => {
+    HTTP.dataFilmes
+      .get('/data')
+      .then((res) => setFilmes(res.data as IFilme[]))
+      .catch((err) => console.error(err))
+      .finally(() => setLoading(false));
+  }, []);
+
+  const [loading, setLoading] = useState(true);
+  if (loading) {
+    return <ContainerLoading />;
+  }
+
+  if (filmes === null) return null;
+
+  const filme = filmes.find(
+    (filme) =>
+      slugify(filme.nome, {
+        lower: true,
+        strict: true,
+      }) === nome
+  );
+
+  if (filme === undefined) return <Home />;
+
   return (
-    <main className="pt-18 bg-base-200 min-h-svh px-5">
-      <div className="flex flex-col gap-5 w-full mx-auto max-w-[90rem]">
-        <Suspense fallback={<div>Carregando...</div>}>
-          <ConteudoFilme />
-        </Suspense>
-      </div>
+    <main className="pt-20 bg-base-200 min-h-svh px-5  mx-auto max-w-[90rem]">
+      <VideoFilme filme={filme} />
+      <DadosFilme filme={filme} />
     </main>
   );
 };
