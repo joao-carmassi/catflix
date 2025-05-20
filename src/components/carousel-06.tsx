@@ -10,7 +10,7 @@ import {
   CarouselPrevious,
   type CarouselApi,
 } from '@/components/ui/carousel';
-import { cn } from '@/lib/utils';
+// import { cn } from '@/lib/utils';
 import CardFilme from './CardFilme';
 import { IFilme } from '@/interface/IFilme';
 
@@ -21,7 +21,9 @@ interface Props {
 
 export default function CarouselWithPagination({ filmes, genero }: Props) {
   const [api, setApi] = React.useState<CarouselApi>();
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [current, setCurrent] = React.useState(0);
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [count, setCount] = React.useState(0);
 
   React.useEffect(() => {
@@ -62,7 +64,7 @@ export default function CarouselWithPagination({ filmes, genero }: Props) {
         <CarouselPrevious className="hidden md:flex" />
         <CarouselNext className="hidden md:flex" />
       </Carousel>
-      <div className="hidden mt-4 md:flex items-center justify-end gap-2">
+      {/* <div className="hidden mt-4 md:flex items-center justify-end gap-2">
         {Array.from({ length: count }).map((_, index) => (
           <button
             key={index}
@@ -72,7 +74,7 @@ export default function CarouselWithPagination({ filmes, genero }: Props) {
             })}
           />
         ))}
-      </div>
+      </div> */}
     </div>
   );
 }

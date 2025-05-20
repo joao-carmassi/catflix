@@ -13,6 +13,10 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  /* TODO: Afazeres
+    !- Animacoes
+  */
+
   return (
     <html lang="pt-BR">
       <body className="dark">

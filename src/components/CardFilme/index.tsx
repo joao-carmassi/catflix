@@ -26,10 +26,10 @@ const CardFilme = ({ filme }: Props) => {
         className="absolute group-hover:opacity-0 bg-black/50 h-full rounded-card top-0 start-0 end-0"
       >
         <div className="p-4 md:p-5">
-          <h3 className="text-sm md:text-md lg:text-lg font-bold text-white break-words shadow-sm shadow-black/80">
+          <h3 className="text-sm md:text-md lg:text-lg font-bold text-white break-words drop-shadow-sm drop-shadow-black/80">
             {filme.nome}
           </h3>
-          <p className="hidden md:block text-white shadow-sm shadow-black/80">
+          <p className="hidden md:block text-white drop-shadow-sm drop-shadow-black/80">
             {filme.dados.tagline || ''}
           </p>
         </div>

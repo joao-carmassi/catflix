@@ -2,10 +2,10 @@
 
 import { HTTP } from '@/service/axios';
 import { IFilme } from '@/interface/IFilme';
-import { useSearchParams } from 'next/navigation';
+import { notFound, useSearchParams } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import DadosFilme from './ConteudoFilme';
-import Home from '../(Homepage)/page';
+import Home from '../(homepage)/page';
 import VideoFilme from './VideoFilme';
 import ContainerLoading from '@/components/ContainerLoading';
 import slugify from 'slugify';
@@ -14,13 +14,23 @@ const PaginaFilme = () => {
   const searchParams = useSearchParams();
   const nome = searchParams.get('nome');
 
+  const [erro, setErro] = useState(false);
   const [filmes, setFilmes] = useState<IFilme[] | null>(null);
 
   useEffect(() => {
     HTTP.dataFilmes
       .get('/data')
-      .then((res) => setFilmes(res.data as IFilme[]))
-      .catch((err) => console.error(err))
+      .then((res) => {
+        if (!res.data || res.data.length === 0) {
+          setErro(true);
+        } else {
+          setFilmes(res.data as IFilme[]);
+        }
+      })
+      .catch((err) => {
+        console.error(err);
+        setErro(true);
+      })
       .finally(() => setLoading(false));
   }, []);
 
@@ -29,6 +39,7 @@ const PaginaFilme = () => {
     return <ContainerLoading />;
   }
 
+  if (erro) return notFound();
   if (filmes === null) return null;
 
   const filme = filmes.find(

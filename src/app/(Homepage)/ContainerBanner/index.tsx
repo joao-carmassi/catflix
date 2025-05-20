@@ -17,14 +17,14 @@ const ContainerBanner = ({ filmes }: Props) => {
   const filme = filmes[random];
 
   return (
-    <section className="h-svh relative max-h-[60rem] z-0">
+    <section className="min-h-[45rem] h-svh relative max-h-[60rem] z-0">
       <img
         className="w-full h-full object-cover"
         src={`https://image.tmdb.org/t/p/w1920${filme.dados.backdrop_path}`}
         alt=""
       />
       <div
-        className={`${styles.banner} absolute flex top-0 flex-col w-full gap-3 h-full items-start justify-center px-5 md:px-20 text-white`}
+        className={`${styles.banner} absolute flex top-0 flex-col w-full gap-1 md:gap-3 h-full items-start justify-center px-5 md:px-20 text-white`}
       >
         <h2 className="capitalize drop-shadow-md drop-shadow-black/80 font-semibold text-3xl md:text-5xl lg:text-7xl">
           {filme.nome}

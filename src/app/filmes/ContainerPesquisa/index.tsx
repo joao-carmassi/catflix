@@ -56,7 +56,7 @@ const ContainerPesquisa = () => {
   return (
     <section
       key={filmesFiltrados.length}
-      className="pb-5 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-5 text-text px-5"
+      className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-5 text-text px-5"
     >
       {filmesFiltrados.length > 0 ? (
         filmesFiltrados.map((filme) => (
