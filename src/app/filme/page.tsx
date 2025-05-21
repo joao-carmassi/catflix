@@ -5,10 +5,10 @@ import { IFilme } from '@/interface/IFilme';
 import { notFound, useSearchParams } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import DadosFilme from './ConteudoFilme';
+import Home from '../(homepage)/page';
 import VideoFilme from './VideoFilme';
 import ContainerLoading from '@/components/ContainerLoading';
 import slugify from 'slugify';
-import Home from '../(Homepage)/page';
 
 const PaginaFilme = () => {
   const searchParams = useSearchParams();

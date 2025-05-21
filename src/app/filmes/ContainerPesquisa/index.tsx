@@ -7,8 +7,6 @@ import { HTTP } from '@/service/axios';
 import { IFilme } from '@/interface/IFilme';
 import ContainerLoading from '@/components/ContainerLoading';
 import { notFound } from 'next/navigation';
-import { motion } from 'motion/react';
-import { InView } from '@/components/ui/in-view';
 
 const ContainerPesquisa = () => {
   const [filmes, setFilmes] = useState<IFilme[] | null>(null);
@@ -56,38 +54,18 @@ const ContainerPesquisa = () => {
   if (!filmes) return null;
 
   return (
-    <InView
-      viewOptions={{ once: true, margin: '0px 0px -150px 0px' }}
-      variants={{
-        hidden: { opacity: 0, y: 40 },
-        visible: {
-          opacity: 1,
-          y: 0,
-          transition: { duration: 0.5, ease: 'easeOut', staggerChildren: 0.05 },
-        },
-      }}
+    <section
+      key={filmesFiltrados.length}
+      className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-5 text-text px-5"
     >
-      <motion.section
-        key={filmesFiltrados.length}
-        className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-5 text-text px-5"
-      >
-        {filmesFiltrados.length > 0 ? (
-          filmesFiltrados.map((filme) => (
-            <motion.div
-              key={filme.id}
-              variants={{
-                hidden: { opacity: 0, scale: 0.9 },
-                visible: { opacity: 1, scale: 1 },
-              }}
-            >
-              <CardFilme filme={filme} />
-            </motion.div>
-          ))
-        ) : (
-          <p>Nenhum filme encontrado ;-;</p>
-        )}
-      </motion.section>
-    </InView>
+      {filmesFiltrados.length > 0 ? (
+        filmesFiltrados.map((filme) => (
+          <CardFilme key={filme.id} filme={filme} />
+        ))
+      ) : (
+        <p>Nenhum filme encontrado ;-;</p>
+      )}
+    </section>
   );
 };
 
