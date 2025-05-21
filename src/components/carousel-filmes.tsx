@@ -11,15 +11,15 @@ import {
   type CarouselApi,
 } from '@/components/ui/carousel';
 // import { cn } from '@/lib/utils';
-import CardFilme from './CardFilme';
 import { IFilme } from '@/interface/IFilme';
+import CardFilme from './card-filmes';
 
 interface Props {
   filmes: IFilme[];
   genero: string;
 }
 
-export default function CarouselWithPagination({ filmes, genero }: Props) {
+export default function CarroselFilmes({ filmes, genero }: Props) {
   const [api, setApi] = React.useState<CarouselApi>();
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [current, setCurrent] = React.useState(0);

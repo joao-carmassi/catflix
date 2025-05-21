@@ -1,4 +1,4 @@
-import SpinnerCircle3 from '../spinner-09';
+import SpinnerCarregando from '../spinner-loading';
 
 interface Props {
   pageSize?: string;
@@ -7,7 +7,7 @@ interface Props {
 const ContainerLoading = ({ pageSize = 'min-h-svh' }: Props) => {
   return (
     <section className={`flex items-center justify-center ${pageSize}`}>
-      <SpinnerCircle3 />
+      <SpinnerCarregando />
     </section>
   );
 };

@@ -6,7 +6,7 @@
 
 :root {
   --radius-input: 0.3rem;
-  --radius-card: 0.3rem;
+  --radius-card: 0rem;
   --height-container: calc(100svh - 5rem);
 
   --background: oklch(0.99 0 0);

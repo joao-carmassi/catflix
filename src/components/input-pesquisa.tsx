@@ -7,7 +7,7 @@ interface Props {
   setValor: (valor: string) => void;
 }
 
-export default function InputRingDemo({
+export default function InputPrincipal({
   type,
   placeholder,
   valor,

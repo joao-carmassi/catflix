@@ -10,7 +10,8 @@
     "deploy": "npx localtunnel --port 3000 --subdomain catflix"
   },
   "dependencies": {
-    "@radix-ui/react-slot": "^1.2.2",
+    "@radix-ui/react-separator": "^1.1.7",
+    "@radix-ui/react-slot": "^1.2.3",
     "@reduxjs/toolkit": "^2.7.0",
     "axios": "^1.9.0",
     "class-variance-authority": "^0.7.1",

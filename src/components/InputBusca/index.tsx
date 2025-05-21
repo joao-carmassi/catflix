@@ -1,8 +1,8 @@
 'use client';
 
 import { useState } from 'react';
-import InputRingDemo from '../input-02';
 import { Search } from 'lucide-react';
+import InputPrincipal from '../input-pesquisa';
 
 interface Props {
   funcao: (nome: string) => void;
@@ -20,7 +20,7 @@ const InputPesquisa = ({ funcao }: Props) => {
         Buscar
       </label>
       <div className="flex w-40 md:w-72 rounded-input">
-        <InputRingDemo
+        <InputPrincipal
           placeholder="Buscar"
           type="text"
           valor={valorInput}

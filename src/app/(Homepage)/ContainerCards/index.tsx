@@ -1,6 +1,6 @@
 'use client';
 
-import CarouselWithPagination from '@/components/carousel-06';
+import CarroselFilmes from '@/components/carousel-filmes';
 import { IFilme } from '@/interface/IFilme';
 
 interface Props {
@@ -19,7 +19,7 @@ const ContainerCards = ({ filmes }: Props) => {
           <h1 className="text-2xl md:text-3xl px-3 md:px-15 font-semibold text-text mb-2">
             {genero}:
           </h1>
-          <CarouselWithPagination filmes={filmes} genero={genero} />
+          <CarroselFilmes filmes={filmes} genero={genero} />
         </div>
       ))}
     </section>
