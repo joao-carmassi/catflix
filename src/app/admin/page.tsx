@@ -5,10 +5,6 @@ import InputPesquisa from '../../components/InputBusca';
 import Form from './form';
 import { IFilme, IFilmeApi } from '@/interface/IFilme';
 
-export const metadata = {
-  title: 'Admin - Catflix',
-};
-
 const pesquisaFilme = (nome: string) => {
   HTTP.filmesApi
     .get(`/search/movie?query=${encodeURIComponent(nome)}`)
