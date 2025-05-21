@@ -12,6 +12,7 @@ export default function Home() {
   const [filmes, setFilmes] = useState<IFilme[] | null>(null);
   const [loading, setLoading] = useState(true);
   const [erro, setErro] = useState(false);
+  const [loaded, setLoaded] = useState(false);
 
   useEffect(() => {
     HTTP.dataFilmes
@@ -35,7 +36,12 @@ export default function Home() {
   if (!filmes) return null;
 
   return (
-    <main className="bg-base-200 -z-20 min-h-svh">
+    <main
+      className={`bg-base-200 -z-20 min-h-svh transition-opacity duration-1000 ${
+        loaded ? 'opacity-100' : 'opacity-0'
+      }`}
+      onLoad={() => setLoaded(true)}
+    >
       <ContainerBanner filmes={filmes} />
       <ContainerCard filmes={filmes} />
     </main>

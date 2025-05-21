@@ -12,6 +12,7 @@ const ContainerPesquisa = () => {
   const [filmes, setFilmes] = useState<IFilme[] | null>(null);
   const [loading, setLoading] = useState(true);
   const [erro, setErro] = useState(false);
+  const [loaded, setLoaded] = useState(false);
 
   const searchParams = useSearchParams();
   const nome = searchParams.get('nome')?.toLowerCase() || '';
@@ -49,14 +50,17 @@ const ContainerPesquisa = () => {
       .sort((a, b) => a.nome.localeCompare(b.nome));
   }, [filmes, nome]);
 
-  if (loading) return <ContainerLoading pageSize="min-h-container" />;
+  if (loading) return <ContainerLoading />;
   if (erro) return notFound();
   if (!filmes) return null;
 
   return (
     <section
       key={filmesFiltrados.length}
-      className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-5 text-text px-5"
+      className={`grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-5 text-text px-5 transition-opacity duration-1000 ${
+        loaded ? 'opacity-100' : 'opacity-0'
+      }`}
+      onLoad={() => setLoaded(true)}
     >
       {filmesFiltrados.length > 0 ? (
         filmesFiltrados.map((filme) => (
