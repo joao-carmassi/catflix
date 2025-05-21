@@ -8,7 +8,7 @@ import DadosFilme from './ConteudoFilme';
 import VideoFilme from './VideoFilme';
 import ContainerLoading from '@/components/ContainerLoading';
 import slugify from 'slugify';
-import Home from '../(homepage)/page';
+import Home from '../(Homepage)/page';
 
 const PaginaFilme = () => {
   const searchParams = useSearchParams();
