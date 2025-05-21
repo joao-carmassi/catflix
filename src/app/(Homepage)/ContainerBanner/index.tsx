@@ -6,7 +6,7 @@ import { useRouter } from 'next/navigation';
 import { IFilme } from '@/interface/IFilme';
 import slugify from 'slugify';
 import { TextEffect } from '@/components/motion-primitives/text-effect';
-import { useMemo, useState } from 'react';
+import { useState } from 'react';
 
 interface Props {
   filmes: IFilme[];
@@ -15,10 +15,7 @@ interface Props {
 const ContainerBanner = ({ filmes }: Props) => {
   const router = useRouter();
 
-  const random = useMemo(
-    () => Math.floor(Math.random() * filmes.length),
-    [filmes]
-  );
+  const [random] = useState(() => Math.floor(Math.random() * filmes.length));
   const filme = filmes[random];
   const [loaded, setLoaded] = useState(false);
 
@@ -49,7 +46,7 @@ const ContainerBanner = ({ filmes }: Props) => {
           <TextEffect
             delay={1.5}
             preset="fade-in-blur"
-            speedReveal={1.1}
+            speedReveal={2}
             speedSegment={0.3}
           >
             {filme.dados.overview}
@@ -59,7 +56,7 @@ const ContainerBanner = ({ filmes }: Props) => {
           <TextEffect
             delay={1.5}
             preset="fade-in-blur"
-            speedReveal={0.5}
+            speedReveal={2}
             speedSegment={0.3}
           >
             {filme.dados.tagline}
