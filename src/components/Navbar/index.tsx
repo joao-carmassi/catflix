@@ -34,7 +34,6 @@ const Navbar = () => {
   if (!loaded) return null;
 
   const path = process.env.NEXT_PUBLIC_BASE_URL;
-  console.log(path);
 
   return (
     <header>
