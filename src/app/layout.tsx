@@ -14,7 +14,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   /* TODO: Afazeres
-    !- Animacoes
+    ? Series
   */
 
   return (

@@ -7,7 +7,7 @@ import { useEffect, useState } from 'react';
 import ContainerLoading from '@/components/ContainerLoading';
 import slugify from 'slugify';
 import Home from '../(Homepage)/page';
-import ContainerBanner from '../../components/ContainerBanner';
+import ContainerBannerInfo from '../../components/ContainerBannerInfo';
 import VideoFilme from './VideoFilme';
 
 const PaginaFilme = () => {
@@ -65,7 +65,7 @@ const PaginaFilme = () => {
         loaded ? 'opacity-100' : 'opacity-0'
       }`}
     >
-      <ContainerBanner
+      <ContainerBannerInfo
         filme={filme}
         home={false}
         tamanho="h-[25rem] md:h-[40rem]"

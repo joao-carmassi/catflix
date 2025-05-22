@@ -26,7 +26,9 @@ const pesquisaFilme = (nome: string) => {
 
 const verificaFilmeExiste = (id: string) => {
   return HTTP.localApi.get('/data').then((res) => {
-    return res.data.find((filme: IFilme) => filme.id === id);
+    return res.data.find(
+      (filme: IFilme) => Number(filme.dados.id) === Number(id)
+    );
   });
 };
 
@@ -36,6 +38,7 @@ const salvaFilme = async (
     React.SetStateAction<{ nome: string; id: string; caminho: string }>
   >
 ) => {
+  const { nome, caminho } = data;
   const filmeExiste = await verificaFilmeExiste(data.id);
   HTTP.filmesApi
     .get(`https://api.themoviedb.org/3/movie/${data.id}`)
@@ -43,7 +46,8 @@ const salvaFilme = async (
       if (res.status !== 200) throw new Error('Erro ao enviar dados a api');
       if (!filmeExiste) {
         HTTP.localApi.post('/data', {
-          ...data,
+          nome,
+          caminho,
           dados: {
             ...res.data,
           },
@@ -64,7 +68,7 @@ const salvaFilme = async (
 
 const Admin = () => {
   return (
-    <main className="pt-18 ">
+    <main className="pt-18 bg-base-200">
       <section className="flex flex-col gap-5 items-center justify-center h-container">
         <InputPesquisa funcao={pesquisaFilme} />
         <hr className="border-primary w-40 md:w-72" />

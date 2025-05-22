@@ -1,7 +1,7 @@
 'use client';
 
 import { Button } from '@/components/ui/button';
-import styles from './ContanerBanner.module.css';
+import styles from './ContanerBannerInfo.module.css';
 import { useRouter } from 'next/navigation';
 import { IFilme } from '@/interface/IFilme';
 import slugify from 'slugify';
@@ -13,7 +13,7 @@ interface Props {
   home?: boolean;
 }
 
-const ContainerBanner = ({
+const ContainerBannerInfo = ({
   filme,
   tamanho = 'h-svh min-h-[45rem]',
   home = true,
@@ -130,4 +130,4 @@ const ContainerBanner = ({
   );
 };
 
-export default ContainerBanner;
+export default ContainerBannerInfo;

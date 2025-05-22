@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import ContainerBanner from '../../components/ContainerBanner';
+import ContainerBannerInfo from '../../components/ContainerBannerInfo';
 import ContainerCard from './ContainerCards';
 import ContainerLoading from '@/components/ContainerLoading';
 import { HTTP } from '@/service/axios';
@@ -53,7 +53,7 @@ export default function Home() {
       }`}
       onLoad={() => setLoaded(true)}
     >
-      <ContainerBanner filme={filme} />
+      <ContainerBannerInfo filme={filme} />
       <ContainerCard filmes={filmes} />
     </main>
   );

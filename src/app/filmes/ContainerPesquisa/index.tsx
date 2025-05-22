@@ -64,7 +64,7 @@ const ContainerPesquisa = () => {
     >
       {filmesFiltrados.length > 0 ? (
         filmesFiltrados.map((filme) => (
-          <CardFilme key={filme.id} filme={filme} />
+          <CardFilme key={filme.dados.id} filme={filme} />
         ))
       ) : (
         <p>Nenhum filme encontrado ;-;</p>
