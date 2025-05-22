@@ -7,9 +7,10 @@ interface Props {
   filme: IFilme;
   temporada: number;
   ep: number;
+  atual?: boolean;
 }
 
-export default function CardSerie({ filme, temporada, ep }: Props) {
+export default function CardSerie({ filme, temporada, ep, atual }: Props) {
   return (
     <Link
       href={`/serie?nome=${slugify(`${filme.nome}`, {
@@ -17,7 +18,11 @@ export default function CardSerie({ filme, temporada, ep }: Props) {
         strict: true,
       })}&temporada=${temporada}&episodio=${ep}`}
     >
-      <Card className="w-full max-w-xs shadow-none">
+      <Card
+        className={`w-full max-w-xs shadow-none border ${
+          atual ? 'border-primary' : ''
+        }`}
+      >
         <CardContent className="p-0">
           <img
             src={`https://image.tmdb.org/t/p/w500${filme.dados.backdrop_path}`}

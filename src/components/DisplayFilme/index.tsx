@@ -1,6 +1,7 @@
 'use client';
 
 import { IFilme } from '@/interface/IFilme';
+import { ArrowBigLeftDash, ArrowBigRightDash } from 'lucide-react';
 import Link from 'next/link';
 
 interface Props {
@@ -62,9 +63,12 @@ const DisplayFilme = ({ filme, temporada, ep }: Props) => {
     <div>
       {!filme.tipo.filme && (
         <div className="p-5 rounded-t-card bg-card flex justify-center flex-col gap-1">
-          <h2 className="font-semibold text-card-foreground text-lg md:text-2xl">
+          <Link
+            href={`/serie/?nome=${filme.nome}`}
+            className="font-semibold text-card-foreground text-lg md:text-2xl"
+          >
             {filme.nome}
-          </h2>
+          </Link>
           <div className="flex gap-2">
             <p className="md:text-lg text-gray-400">Temporada {temporada}</p>
             <p className="md:text-lg text-gray-400">Episodio {ep}</p>
@@ -92,29 +96,29 @@ const DisplayFilme = ({ filme, temporada, ep }: Props) => {
         </a>
       </video>
       {!filme.tipo.filme && (
-        <div className="h-10 md:h-14 rounded-b-card bg-card flex items-center justify-between text-card-foreground">
+        <div className="rounded-b-card bg-card flex items-center justify-between text-card-foreground">
           {epAnterior ? (
             <Link
               href={epAnterior as string}
-              className="grid place-items-center hover:bg-primary/80 hover:cursor-pointer disabled:bg-gray-600 disabled:text-foreground px-3 md:px-5 h-full bg-primary text-background font-semibold text-sm md:text-base rounded-bl-card"
+              className="grid place-items-center hover:bg-primary/80 hover:cursor-pointer disabled:bg-gray-600 disabled:text-foreground p-2 md:p-3 px-4 md:px-6 h-full bg-primary text-background font-semibold text-sm md:text-base rounded-bl-card"
             >
-              Episodio anterior
+              <ArrowBigLeftDash className="p-0.5 md:p-0" />
             </Link>
           ) : (
-            <div className="h-full grid place-items-center bg-gray-600 text-foreground px-3 md:px-5 font-semibold rounded-br-card text-sm md:text-base">
-              Episodio anterior
+            <div className="h-full grid place-items-center bg-gray-600 text-foreground p-2 md:p-3 px-4 md:px-6 font-semibold rounded-br-card text-sm md:text-base">
+              <ArrowBigLeftDash className="p-0.5 md:p-0" />
             </div>
           )}
           {proximoEp ? (
             <Link
               href={proximoEp as string}
-              className="grid place-items-center hover:bg-primary/80 hover:cursor-pointer disabled:bg-gray-600 disabled:text-foreground px-3 md:px-5 h-full bg-primary text-background font-semibold text-sm md:text-base rounded-br-card"
+              className="grid place-items-center hover:bg-primary/80 hover:cursor-pointer disabled:bg-gray-600 disabled:text-foreground p-2 md:p-3 px-4 md:px-6 h-full bg-primary text-background font-semibold text-sm md:text-base rounded-br-card"
             >
-              Proximo episodio
+              <ArrowBigRightDash className="p-0.5 md:p-0" />
             </Link>
           ) : (
-            <div className="h-full grid place-items-center bg-gray-600 text-foreground px-3 md:px-5 font-semibold rounded-br-card text-sm md:text-base">
-              Proximo episodio
+            <div className="h-full grid place-items-center bg-gray-600 text-foreground p-2 md:p-3 px-4 md:px-6 font-semibold rounded-br-card text-sm md:text-base">
+              <ArrowBigRightDash className="p-0.5 md:p-0" />
             </div>
           )}
         </div>

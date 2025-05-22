@@ -77,9 +77,14 @@ const PaginaSerie = () => {
         loaded ? 'opacity-100' : 'opacity-0'
       }`}
     >
-      <section className="w-full px-5 lg:px-20 flex flex-col gap-5">
+      <section className="w-full px-5 lg:px-20">
         <DisplayFilme filme={filme} temporada={temporada} ep={episodio} />
-        <DisplayEps filme={filme} temporada={Number(temporada) - 1} />
+        <DisplayEps
+          filme={filme}
+          temporada={Number(temporada)}
+          temporadaAtual={Number(temporada)}
+          epAtual={Number(episodio)}
+        />
       </section>
     </main>
   );
