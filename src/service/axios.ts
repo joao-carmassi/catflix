@@ -13,8 +13,11 @@ const filmesApi = axios.create({
 
 // API LOCAL HOST -------------------------------------
 const localApi = axios.create({
-  baseURL: 'http://localhost:3001/',
+  baseURL: 'https://api-catflix.loca.lt',
 });
+// const localApi = axios.create({
+//   baseURL: 'http://localhost:3001/',
+// });
 
 // API NPOINT -----------------------------------------
 const dataFilmes = axios.create({

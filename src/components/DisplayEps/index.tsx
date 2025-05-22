@@ -9,12 +9,17 @@ import {
 
 interface Props {
   filme: IFilme;
+  temporada?: number;
 }
 
-const DisplayEps = ({ filme }: Props) => {
+const DisplayEps = ({ filme, temporada }: Props) => {
   return (
     <div className="w-full">
       <Accordion
+        key={`${filme.dados.id}-${temporada}`}
+        {...(filme.tipo.temporadas.length > 1 && {
+          defaultValue: [`item-${temporada}`],
+        })}
         type="multiple"
         className="bg-card text-card-foreground px-5 w-full"
       >

@@ -92,28 +92,28 @@ const DisplayFilme = ({ filme, temporada, ep }: Props) => {
         </a>
       </video>
       {!filme.tipo.filme && (
-        <div className="h-14 rounded-b-card bg-card flex items-center justify-between text-card-foreground">
+        <div className="h-10 md:h-14 rounded-b-card bg-card flex items-center justify-between text-card-foreground">
           {epAnterior ? (
             <Link
               href={epAnterior as string}
-              className="grid place-items-center hover:bg-primary/80 hover:cursor-pointer disabled:bg-gray-600 disabled:text-foreground px-5 h-full bg-primary text-background font-semibold rounded-bl-card"
+              className="grid place-items-center hover:bg-primary/80 hover:cursor-pointer disabled:bg-gray-600 disabled:text-foreground px-3 md:px-5 h-full bg-primary text-background font-semibold text-sm md:text-base rounded-bl-card"
             >
               Episodio anterior
             </Link>
           ) : (
-            <div className="h-full grid place-items-center bg-gray-600 text-foreground px-5 h-fullfont-semibold rounded-br-card">
+            <div className="h-full grid place-items-center bg-gray-600 text-foreground px-3 md:px-5 font-semibold rounded-br-card text-sm md:text-base">
               Episodio anterior
             </div>
           )}
           {proximoEp ? (
             <Link
               href={proximoEp as string}
-              className="grid place-items-center hover:bg-primary/80 hover:cursor-pointer disabled:bg-gray-600 disabled:text-foreground px-5 h-full bg-primary text-background font-semibold rounded-br-card"
+              className="grid place-items-center hover:bg-primary/80 hover:cursor-pointer disabled:bg-gray-600 disabled:text-foreground px-3 md:px-5 h-full bg-primary text-background font-semibold text-sm md:text-base rounded-br-card"
             >
               Proximo episodio
             </Link>
           ) : (
-            <div className="h-full grid place-items-center bg-gray-600 text-foreground px-5 h-fullfont-semibold rounded-br-card">
+            <div className="h-full grid place-items-center bg-gray-600 text-foreground px-3 md:px-5 font-semibold rounded-br-card text-sm md:text-base">
               Proximo episodio
             </div>
           )}
