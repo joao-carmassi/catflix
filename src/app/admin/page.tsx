@@ -51,6 +51,7 @@ const salvaFilme = async (
   const { nome, caminho, tipo } = data;
   const filmeExiste = await verificaFilmeExiste(data.id);
   const ehFilme = tipo === 'filme' ? true : false;
+  const iniciaTemporadas = ehFilme ? [] : [{ temporada: 1, episodios: 1 }];
 
   HTTP.filmesApi
     .get(`/${ehFilme ? 'movie' : 'tv'}/${data.id}?language=pt-BR`)
@@ -62,12 +63,7 @@ const salvaFilme = async (
           caminho,
           tipo: {
             filme: ehFilme,
-            temporadas: [
-              {
-                temporada: 1,
-                episodios: 1,
-              },
-            ],
+            temporadas: iniciaTemporadas,
           },
           dados: {
             ...res.data,
