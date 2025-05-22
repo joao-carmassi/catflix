@@ -27,7 +27,7 @@ export default function CardFilme({ filme }: Props) {
             <p className="mt-1 text-sm text-muted-foreground">
               {filme.dados.tagline}
             </p>
-            <p className="text-primary mt-1 block text-sm">
+            <p className="text-primary mt-1 font-semibold block text-sm">
               {filme.dados.genres.map((categoria) => categoria.name).join(', ')}
             </p>
           </div>

@@ -7,10 +7,7 @@ interface Props {
 
 const VideoFilme = ({ filme }: Props) => {
   return (
-    <section className="w-full">
-      <h1 className="text-text mb-2 text-xl md:text-3xl font-semibold">
-        {filme?.nome}
-      </h1>
+    <section className="w-full px-5 md:px-20 py-5">
       <video controls className="w-full">
         <source
           src={`https://server-catflix.loca.lt/${filme?.caminho}`}

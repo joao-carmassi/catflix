@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import ContainerBanner from './ContainerBanner';
+import ContainerBanner from '../../components/ContainerBanner';
 import ContainerCard from './ContainerCards';
 import ContainerLoading from '@/components/ContainerLoading';
 import { HTTP } from '@/service/axios';
@@ -13,6 +13,7 @@ export default function Home() {
   const [loading, setLoading] = useState(true);
   const [erro, setErro] = useState(false);
   const [loaded, setLoaded] = useState(false);
+  const [random, setRandom] = useState(0);
 
   useEffect(() => {
     HTTP.dataFilmes
@@ -28,21 +29,31 @@ export default function Home() {
         console.error(err);
         setErro(true);
       })
-      .finally(() => setLoading(false));
+      .finally(() => {
+        setLoading(false);
+      });
   }, []);
+
+  useEffect(() => {
+    if (filmes && filmes.length > 0) {
+      setRandom(Math.floor(Math.random() * filmes.length));
+    }
+  }, [filmes]);
 
   if (loading) return <ContainerLoading />;
   if (erro) return notFound();
   if (!filmes) return null;
 
+  const filme = filmes[random];
+
   return (
     <main
-      className={`bg-base-200 -z-20 min-h-svh transition-opacity duration-1000 ${
+      className={` -z-20 min-h-svh transition-opacity duration-1000 ${
         loaded ? 'opacity-100' : 'opacity-0'
       }`}
       onLoad={() => setLoaded(true)}
     >
-      <ContainerBanner filmes={filmes} />
+      <ContainerBanner filme={filme} />
       <ContainerCard filmes={filmes} />
     </main>
   );

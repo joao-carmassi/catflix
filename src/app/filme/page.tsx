@@ -4,11 +4,11 @@ import { HTTP } from '@/service/axios';
 import { IFilme } from '@/interface/IFilme';
 import { notFound, useSearchParams } from 'next/navigation';
 import { useEffect, useState } from 'react';
-import DadosFilme from './ConteudoFilme';
-import VideoFilme from './VideoFilme';
 import ContainerLoading from '@/components/ContainerLoading';
 import slugify from 'slugify';
 import Home from '../(Homepage)/page';
+import ContainerBanner from '../../components/ContainerBanner';
+import VideoFilme from './VideoFilme';
 
 const PaginaFilme = () => {
   const searchParams = useSearchParams();
@@ -61,12 +61,16 @@ const PaginaFilme = () => {
 
   return (
     <main
-      className={`pt-20 bg-base-200 min-h-svh px-5  mx-auto max-w-[90rem] transition-opacity duration-1000 ${
+      className={`min-h-screen transition-opacity duration-1000 ${
         loaded ? 'opacity-100' : 'opacity-0'
       }`}
     >
+      <ContainerBanner
+        filme={filme}
+        home={false}
+        tamanho="h-[25rem] md:h-[40rem]"
+      />
       <VideoFilme filme={filme} />
-      <DadosFilme filme={filme} />
     </main>
   );
 };

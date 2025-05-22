@@ -64,7 +64,7 @@ const salvaFilme = async (
 
 const Admin = () => {
   return (
-    <main className="pt-18 bg-base-200">
+    <main className="pt-18 ">
       <section className="flex flex-col gap-5 items-center justify-center h-container">
         <InputPesquisa funcao={pesquisaFilme} />
         <hr className="border-primary w-40 md:w-72" />
