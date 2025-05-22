@@ -25,6 +25,12 @@ const InputPesquisa = ({ funcao }: Props) => {
           type="text"
           valor={valorInput}
           setValor={setValorInput}
+          onKeyDown={(e) => {
+            if (e.key === 'Enter') {
+              funcao(valorInput);
+              setValorInput('');
+            }
+          }}
         />
         <button
           style={{ transitionDuration: '.2s' }}

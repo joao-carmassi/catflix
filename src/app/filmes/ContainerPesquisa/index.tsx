@@ -7,6 +7,7 @@ import { IFilme } from '@/interface/IFilme';
 import ContainerLoading from '@/components/ContainerLoading';
 import { notFound } from 'next/navigation';
 import CardFilme from '@/components/CardFilme/card-filmes';
+import slugify from 'slugify';
 
 const ContainerPesquisa = () => {
   const [filmes, setFilmes] = useState<IFilme[] | null>(null);
@@ -36,14 +37,25 @@ const ContainerPesquisa = () => {
 
   const filmesFiltrados = useMemo(() => {
     if (!filmes) return [];
+
+    const nomeSlug = slugify(nome, { lower: true });
+
+    const generoMatchExato = (text: string) => {
+      const words = slugify(text || '', { lower: true }).split('-');
+      return words.includes(nomeSlug);
+    };
+
     return filmes
       .filter((filme) => {
-        const nomeMatch = filme?.nome?.toLowerCase().includes(nome);
+        const nomeMatch = slugify(filme?.nome || '', { lower: true }).includes(
+          nomeSlug
+        );
         const produtoraMatch = filme?.dados?.production_companies?.some(
-          (company) => company?.name?.toLowerCase().includes(nome)
+          (company) =>
+            slugify(company?.name || '', { lower: true }).includes(nomeSlug)
         );
         const generoMatch = filme?.dados?.genres?.some((genre) =>
-          genre?.name?.toLowerCase().includes(nome)
+          generoMatchExato(genre?.name)
         );
         return nomeMatch || produtoraMatch || generoMatch;
       })
