@@ -50,15 +50,23 @@ const ContainerBannerInfo = ({
               home ? '' : 'hidden'
             } flex flex-col items-start gap-1 lg:gap-3`}
           >
-            <p className="font-semibold gap-3 drop-shadow-sm drop-shadow-black/80">
-              {filme.dados.genres.map((categoria) => categoria.name).join(', ')}
-            </p>
-            <p className="text-xl hidden lg:block md:w-1/2 drop-shadow-sm drop-shadow-black/80">
-              {filme.dados.overview}
-            </p>
-            <p className="text-xl block lg:hidden md:w-1/2 drop-shadow-sm drop-shadow-black/80">
-              {filme.dados.tagline}
-            </p>
+            {filme.dados.genres && (
+              <p className="font-semibold gap-3 drop-shadow-sm drop-shadow-black/80">
+                {filme.dados.genres
+                  .map((categoria) => categoria.name)
+                  .join(', ')}
+              </p>
+            )}
+            {filme.dados.overview && (
+              <p className="text-xl hidden lg:block md:w-1/2 drop-shadow-sm drop-shadow-black/80">
+                {filme.dados.overview}
+              </p>
+            )}
+            {filme.dados.tagline && (
+              <p className="text-xl block lg:hidden md:w-1/2 drop-shadow-sm drop-shadow-black/80">
+                {filme.dados.tagline}
+              </p>
+            )}
             <Button
               onClick={() =>
                 router.push(
@@ -91,41 +99,55 @@ const ContainerBannerInfo = ({
           home ? 'hidden' : 'block'
         } px-5 md:px-20 mt-3 grid gap-y-3 gap-x-5 grid-flow-row md:grid-cols-2`}
       >
-        <p className="text-text text-base md:text-lg text-gray-400 col-span-2">
-          <span className="text-foreground font-semibold">Description:</span>{' '}
-          {filme?.dados.overview}
-        </p>
-        <p className="text-text text-base md:text-lg text-gray-400">
-          <span className="text-foreground font-semibold">Release date:</span>{' '}
-          {filme?.dados.release_date.split('-').reverse().join('/')}
-        </p>
-        <p className="text-text text-base md:text-lg text-gray-400">
-          <span className="text-foreground font-semibold">Rating:</span>{' '}
-          {filme?.dados.vote_average.toFixed(1)}
-        </p>
-        <p className="text-text text-base md:text-lg text-gray-400">
-          <span className="text-foreground font-semibold">Genres:</span>{' '}
-          {filme?.dados.genres.map((genre) => genre.name).join(', ')}
-        </p>
+        {filme.dados.overview && (
+          <p className="text-text text-base md:text-lg text-gray-400 col-span-2">
+            <span className="text-foreground font-semibold">Descrição:</span>{' '}
+            {filme.dados.overview}
+          </p>
+        )}
+        {filme.dados.release_date && (
+          <p className="text-text text-base md:text-lg text-gray-400">
+            <span className="text-foreground font-semibold">
+              Data de Lancamento:
+            </span>{' '}
+            {filme.dados.release_date.split('-').reverse().join('/')}
+          </p>
+        )}
+        {filme.dados.vote_average && (
+          <p className="text-text text-base md:text-lg text-gray-400">
+            <span className="text-foreground font-semibold">Avaliação:</span>{' '}
+            {filme.dados.vote_average.toFixed(1)}
+          </p>
+        )}
+        {filme?.dados.genres && (
+          <p className="text-text text-base md:text-lg text-gray-400">
+            <span className="text-foreground font-semibold">Generos:</span>{' '}
+            {filme.dados.genres.map((genre) => genre.name).join(', ')}
+          </p>
+        )}
         {filme?.dados.runtime && (
           <p className="text-text text-base md:text-lg text-gray-400">
-            <span className="text-foreground font-semibold">Runtime:</span>{' '}
+            <span className="text-foreground font-semibold">Duração:</span>{' '}
             {Math.floor(filme.dados.runtime / 60)}h {filme.dados.runtime % 60}m
           </p>
         )}
-        <p className="text-text text-base md:text-lg text-gray-400">
-          <span className="text-foreground font-semibold">Origin Country:</span>{' '}
-          {filme?.dados.origin_country.map((country) => country).join(', ')}
-        </p>
-        <p className="text-text text-base md:text-lg text-gray-400">
-          <span className="text-foreground font-semibold">
-            Production Companies:
-          </span>{' '}
-          {filme?.dados.production_companies
-            .map((company) => company.name)
-            .slice(0, 1)
-            .join(', ')}
-        </p>
+        {filme.dados.origin_country && (
+          <p className="text-text text-base md:text-lg text-gray-400">
+            <span className="text-foreground font-semibold">
+              Pais de origem:
+            </span>{' '}
+            {filme?.dados.origin_country.map((country) => country).join(', ')}
+          </p>
+        )}
+        {filme.dados.production_companies && (
+          <p className="text-text text-base md:text-lg text-gray-400">
+            <span className="text-foreground font-semibold">Produtoras:</span>{' '}
+            {filme?.dados.production_companies
+              .map((company) => company.name)
+              .slice(0, 1)
+              .join(', ')}
+          </p>
+        )}
       </section>
     </>
   );

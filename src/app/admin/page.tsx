@@ -5,9 +5,13 @@ import InputPesquisa from '../../components/InputBusca';
 import Form from './form';
 import { IFilme, IFilmeApi } from '@/interface/IFilme';
 
-const pesquisaFilme = (nome: string) => {
+const pesquisaFilme = (nome: string, filme = false) => {
   HTTP.filmesApi
-    .get(`/search/movie?query=${encodeURIComponent(nome)}`)
+    .get(
+      `/search/${filme ? 'movie' : 'tv'}?query=${encodeURIComponent(
+        nome
+      )}&language=pt-BR`
+    )
     .then((res) => {
       if (res.status !== 200) throw new Error('Erro ao baixa dados da api');
       const data: IFilmeApi[] = res.data.results;
@@ -49,7 +53,7 @@ const salvaFilme = async (
   const ehFilme = tipo === 'filme' ? true : false;
 
   HTTP.filmesApi
-    .get(`https://api.themoviedb.org/3/movie/${data.id}`)
+    .get(`/${ehFilme ? 'movie' : 'tv'}/${data.id}?language=pt-BR`)
     .then((res) => {
       if (res.status !== 200) throw new Error('Erro ao enviar dados a api');
       if (!filmeExiste) {
@@ -58,7 +62,12 @@ const salvaFilme = async (
           caminho,
           tipo: {
             filme: ehFilme,
-            temporadas: [],
+            temporadas: [
+              {
+                temporada: 1,
+                episodios: 1,
+              },
+            ],
           },
           dados: {
             ...res.data,

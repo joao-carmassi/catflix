@@ -14,7 +14,9 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   /* TODO: Afazeres
+    ! Colocar link imagem ao buscar filme
     ? Series
+    * Melhorar pagina pesquisa e nav
   */
 
   return (

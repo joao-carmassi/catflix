@@ -8,7 +8,7 @@ import ContainerLoading from '@/components/ContainerLoading';
 import slugify from 'slugify';
 import Home from '../(Homepage)/page';
 import ContainerBannerInfo from '../../components/ContainerBannerInfo';
-import VideoFilme from './VideoFilme';
+import AssitaConteudo from './AssitaConteudo';
 
 const PaginaFilme = () => {
   const searchParams = useSearchParams();
@@ -61,7 +61,7 @@ const PaginaFilme = () => {
 
   return (
     <main
-      className={`min-h-screen transition-opacity duration-1000 ${
+      className={`min-h-screen pb-5 transition-opacity duration-1000 ${
         loaded ? 'opacity-100' : 'opacity-0'
       }`}
     >
@@ -70,7 +70,7 @@ const PaginaFilme = () => {
         home={false}
         tamanho="h-[25rem] md:h-[40rem]"
       />
-      <VideoFilme filme={filme} />
+      <AssitaConteudo filme={filme} />
     </main>
   );
 };

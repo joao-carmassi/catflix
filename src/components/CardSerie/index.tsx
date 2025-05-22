@@ -5,16 +5,17 @@ import slugify from 'slugify';
 
 interface Props {
   filme: IFilme;
+  temporada: number;
   ep: number;
 }
 
-export default function CardSerie({ filme, ep }: Props) {
+export default function CardSerie({ filme, temporada, ep }: Props) {
   return (
     <Link
-      href={`/filme?nome=${slugify(filme.nome, {
+      href={`/serie?nome=${slugify(`${filme.nome}`, {
         lower: true,
         strict: true,
-      })}`}
+      })}&temporada=${temporada}&episodio=${ep}`}
     >
       <Card className="w-full max-w-xs shadow-none">
         <CardContent className="p-0">
