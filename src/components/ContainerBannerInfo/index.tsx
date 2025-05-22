@@ -89,7 +89,7 @@ const ContainerBannerInfo = ({
       <section
         className={`${
           home ? 'hidden' : 'block'
-        } px-5 md:px-20 mt-2 grid gap-y-3 gap-x-5 grid-flow-row md:grid-cols-2`}
+        } px-5 md:px-20 mt-3 grid gap-y-3 gap-x-5 grid-flow-row md:grid-cols-2`}
       >
         <p className="text-text text-base md:text-lg text-gray-400 col-span-2">
           <span className="text-foreground font-semibold">Description:</span>{' '}

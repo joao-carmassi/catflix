@@ -17,6 +17,7 @@ const pesquisaFilme = (nome: string) => {
             title: item.title,
             id: item.id,
             data: item.release_date,
+            description: item.overview,
           };
         })
       );
@@ -33,13 +34,20 @@ const verificaFilmeExiste = (id: string) => {
 };
 
 const salvaFilme = async (
-  data: { nome: string; id: string; caminho: string },
+  data: { nome: string; id: string; tipo: string; caminho: string },
   setForm: React.Dispatch<
-    React.SetStateAction<{ nome: string; id: string; caminho: string }>
+    React.SetStateAction<{
+      nome: string;
+      id: string;
+      tipo: string;
+      caminho: string;
+    }>
   >
 ) => {
-  const { nome, caminho } = data;
+  const { nome, caminho, tipo } = data;
   const filmeExiste = await verificaFilmeExiste(data.id);
+  const ehFilme = tipo === 'filme' ? true : false;
+
   HTTP.filmesApi
     .get(`https://api.themoviedb.org/3/movie/${data.id}`)
     .then((res) => {
@@ -48,6 +56,10 @@ const salvaFilme = async (
         HTTP.localApi.post('/data', {
           nome,
           caminho,
+          tipo: {
+            filme: ehFilme,
+            temporadas: [],
+          },
           dados: {
             ...res.data,
           },
@@ -60,6 +72,7 @@ const salvaFilme = async (
       setForm({
         nome: '',
         id: '',
+        tipo: 'filme',
         caminho: '',
       });
     })

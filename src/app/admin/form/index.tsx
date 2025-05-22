@@ -1,11 +1,19 @@
 import InputPadrao from '@/components/InputPadrao';
+import { Button } from '@/components/ui/button';
+import { Label } from '@/components/ui/label';
+import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
 import { ChangeEvent, useState } from 'react';
 
 interface Props {
   salvaFilme: (
-    form: { nome: string; id: string; caminho: string },
+    form: { nome: string; id: string; tipo: string; caminho: string },
     setForm: React.Dispatch<
-      React.SetStateAction<{ nome: string; id: string; caminho: string }>
+      React.SetStateAction<{
+        nome: string;
+        id: string;
+        tipo: string;
+        caminho: string;
+      }>
     >
   ) => void;
 }
@@ -14,6 +22,7 @@ const Form = ({ salvaFilme }: Props) => {
   const [form, setForm] = useState({
     nome: '',
     id: '',
+    tipo: 'filme',
     caminho: '',
   });
 
@@ -33,7 +42,7 @@ const Form = ({ salvaFilme }: Props) => {
   return (
     <form
       onSubmit={handleSubmit}
-      className="flex flex-col items-center justify-center gap-5"
+      className="flex flex-col justify-center gap-5"
       action="submit"
     >
       <InputPadrao
@@ -47,13 +56,22 @@ const Form = ({ salvaFilme }: Props) => {
         valorInput={form.caminho}
         handleChange={handleChange}
       />
-      <button
-        style={{ transitionDuration: '.2s' }}
-        className="text-white border hover:bg-primary hover:border-primary hover:text-white active:scale-95 border-white px-5 font-semibold py-2 rounded-input"
-        type="submit"
+      <RadioGroup
+        defaultValue="filme"
+        value={form.tipo}
+        onValueChange={(value) => setForm((prev) => ({ ...prev, tipo: value }))}
+        className="flex items-center gap-3"
       >
-        Enviar
-      </button>
+        <div className="flex items-center space-x-2">
+          <RadioGroupItem value="filme" id="filme" />
+          <Label htmlFor="filme">Filme</Label>
+        </div>
+        <div className="flex items-center space-x-2">
+          <RadioGroupItem value="serie" id="serie" />
+          <Label htmlFor="serie">Serie</Label>
+        </div>
+      </RadioGroup>
+      <Button variant="outline">Enviar</Button>
     </form>
   );
 };

@@ -32,8 +32,11 @@ export interface IFilmeApi {
 }
 
 export interface IFilme {
-  id: string;
   nome: string;
+  tipo: {
+    filme: boolean;
+    temporadas: number[];
+  };
   caminho: string;
   dados: IFilmeApi;
 }
