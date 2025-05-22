@@ -23,11 +23,13 @@ export default function CardFilme({ filme }: Props) {
             className="relative aspect-video bg-muted border-t-card"
           />
           <div className="pt-3 pb-4 px-6">
-            <h2 className="font-semibold break-words">{filme.nome}</h2>
-            <p className="mt-1 text-sm text-muted-foreground">
+            <h2 className="font-semibold text-sm md:text-md break-words">
+              {filme.nome}
+            </h2>
+            <p className="mt-1 text-xs md:text-sm text-muted-foreground">
               {filme.dados.tagline}
             </p>
-            <p className="text-primary mt-1 font-semibold block text-sm">
+            <p className="text-primary mt-1 font-semibold block text-xs md:text-sm">
               {filme.dados.genres.map((categoria) => categoria.name).join(', ')}
             </p>
           </div>

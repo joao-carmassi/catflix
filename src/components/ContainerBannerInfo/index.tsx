@@ -123,6 +123,7 @@ const ContainerBannerInfo = ({
           </span>{' '}
           {filme?.dados.production_companies
             .map((company) => company.name)
+            .slice(0, 1)
             .join(', ')}
         </p>
       </section>

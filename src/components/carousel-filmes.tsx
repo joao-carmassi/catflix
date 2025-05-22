@@ -12,7 +12,7 @@ import {
 } from '@/components/ui/carousel';
 // import { cn } from '@/lib/utils';
 import { IFilme } from '@/interface/IFilme';
-import CardFilme from './card-filmes';
+import CardFilme from './CardFilme/card-filmes';
 
 interface Props {
   filmes: IFilme[];

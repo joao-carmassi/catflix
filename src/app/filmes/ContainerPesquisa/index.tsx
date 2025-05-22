@@ -6,7 +6,7 @@ import { HTTP } from '@/service/axios';
 import { IFilme } from '@/interface/IFilme';
 import ContainerLoading from '@/components/ContainerLoading';
 import { notFound } from 'next/navigation';
-import CardFilme from '@/components/card-filmes';
+import CardFilme from '@/components/CardFilme/card-filmes';
 
 const ContainerPesquisa = () => {
   const [filmes, setFilmes] = useState<IFilme[] | null>(null);
