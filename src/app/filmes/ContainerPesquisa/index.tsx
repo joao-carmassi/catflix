@@ -69,7 +69,7 @@ const ContainerPesquisa = () => {
   return (
     <section
       key={filmesFiltrados.length}
-      className={`grid items-center grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-5 text-text px-5 transition-opacity duration-1000 ${
+      className={`pt-18 grid items-center grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-5 text-text px-5 transition-opacity duration-1000 ${
         loaded ? 'opacity-100' : 'opacity-0'
       }`}
       onLoad={() => setLoaded(true)}

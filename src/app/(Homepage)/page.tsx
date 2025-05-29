@@ -48,7 +48,7 @@ export default function Home() {
 
   return (
     <main
-      className={` -z-20 min-h-svh transition-opacity duration-1000 ${
+      className={`-z-20 min-h-svh transition-opacity duration-1000 ${
         loaded ? 'opacity-100' : 'opacity-0'
       }`}
       onLoad={() => setLoaded(true)}
