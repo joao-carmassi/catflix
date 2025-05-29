@@ -13,7 +13,7 @@ const ContainerCards = ({ filmes }: Props) => {
   ).sort((a, b) => a.localeCompare(b));
 
   return (
-    <section className="-mt-[6rem] pb-3 md:px-5 md:-mt-[9.25rem] flex flex-col gap-15 relative z-10">
+    <section className="-mt-[6rem] pb-5 md:px-5 md:-mt-[9.25rem] flex flex-col gap-15 relative z-10">
       {generos.map((genero, i) => (
         <div key={i}>
           <h1 className="text-2xl md:text-3xl px-3 md:px-15 font-semibold text-text mb-2">

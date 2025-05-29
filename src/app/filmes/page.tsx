@@ -8,7 +8,7 @@ export const metadata = {
 
 const PaginaPesquisa = () => {
   return (
-    <main className="min-h-svh">
+    <main className="min-h-svh pb-5">
       <Suspense>
         <ContainerPesquisa />
       </Suspense>
