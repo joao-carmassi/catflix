@@ -12,7 +12,7 @@ import {
 } from '@/components/ui/carousel';
 // import { cn } from '@/lib/utils';
 import { IFilme } from '@/interface/IFilme';
-import CardFilme from './CardFilme/card-filmes';
+import CardDados from './CardDados';
 
 interface Props {
   filmes: IFilme[];
@@ -57,7 +57,7 @@ export default function CarroselFilmes({ filmes, genero }: Props) {
                 className="basis-1/2 md:basis-1/4 lg:basis-1/6"
                 key={idx}
               >
-                <CardFilme filme={filme} />
+                <CardDados filme={filme} />
               </CarouselItem>
             ))}
         </CarouselContent>

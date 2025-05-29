@@ -7,10 +7,11 @@ interface Props {
   filme: IFilme;
 }
 
-export default function CardFilme({ filme }: Props) {
+export default function CardDados({ filme }: Props) {
   return (
     <Link
-      href={`/filme?nome=${slugify(filme.nome, {
+      prefetch={false}
+      href={`/sobre?nome=${slugify(filme.nome, {
         lower: true,
         strict: true,
       })}`}

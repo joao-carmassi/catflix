@@ -5,15 +5,21 @@ import slugify from 'slugify';
 
 interface Props {
   filme: IFilme;
-  temporada: number;
-  ep: number;
+  temporada?: number;
+  ep?: number;
   atual?: boolean;
 }
 
-export default function CardSerie({ filme, temporada, ep, atual }: Props) {
+export default function CardParaAssistir({
+  filme,
+  temporada,
+  ep,
+  atual,
+}: Props) {
   return (
     <Link
-      href={`/serie?nome=${slugify(`${filme.nome}`, {
+      prefetch={false}
+      href={`/assistindo?nome=${slugify(`${filme.nome}`, {
         lower: true,
         strict: true,
       })}&temporada=${temporada}&episodio=${ep}`}
@@ -30,10 +36,22 @@ export default function CardSerie({ filme, temporada, ep, atual }: Props) {
             className="relative aspect-video bg-muted border-t-card"
           />
           <div className="pt-3 pb-4 px-6">
-            <h2 className="text-sm text-gray-400 break-words">{filme.nome}</h2>
-            <p className="mt-1 font-semibold text-sm text-muted-foreground">
-              Episódio {ep}
-            </p>
+            {filme.tipo.filme ? (
+              <>
+                <p className="mt-1 font-semibold text-sm text-muted-foreground">
+                  {filme.nome}
+                </p>
+              </>
+            ) : (
+              <>
+                <h2 className="text-sm text-gray-400 break-words">
+                  {filme.nome}
+                </h2>
+                <p className="mt-1 font-semibold text-sm text-muted-foreground">
+                  Episódio {ep}
+                </p>
+              </>
+            )}
           </div>
         </CardContent>
       </Card>

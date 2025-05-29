@@ -7,14 +7,12 @@ import { useEffect, useState } from 'react';
 import ContainerLoading from '@/components/ContainerLoading';
 import slugify from 'slugify';
 import Home from '../(Homepage)/page';
-import DisplayFilme from '@/components/DisplayFilme';
+import ContainerBannerInfo from '../../components/ContainerBannerInfo';
 import DisplayEps from '@/components/DisplayEps';
 
-const PaginaSerie = () => {
+const PaginaFilme = () => {
   const searchParams = useSearchParams();
   const nome = searchParams.get('nome');
-  const temporada = searchParams.get('temporada');
-  const episodio = searchParams.get('episodio');
 
   const [loaded, setLoaded] = useState(false);
   const [erro, setErro] = useState(false);
@@ -60,34 +58,23 @@ const PaginaSerie = () => {
   );
 
   if (filme === undefined) return <Home />;
-  if (!temporada || !episodio) return <Home />;
-
-  const temporadaNum = parseInt(temporada);
-  const episodioNum = parseInt(episodio);
-
-  const temporadaExiste = filme.tipo.temporadas.some(
-    (t) => t.temporada === temporadaNum && t.episodios >= episodioNum
-  );
-
-  if (!temporadaExiste) return <Home />;
 
   return (
     <main
-      className={`min-h-screen pt-18 pb-5 transition-opacity duration-1000 ${
+      className={`min-h-screen pb-5 transition-opacity duration-1000 ${
         loaded ? 'opacity-100' : 'opacity-0'
       }`}
     >
-      <section className="w-full px-5 lg:px-20">
-        <DisplayFilme filme={filme} temporada={temporada} ep={episodio} />
-        <DisplayEps
-          filme={filme}
-          temporada={Number(temporada)}
-          temporadaAtual={Number(temporada)}
-          epAtual={Number(episodio)}
-        />
+      <ContainerBannerInfo
+        filme={filme}
+        home={false}
+        tamanho="h-[25rem] md:h-[40rem]"
+      />
+      <section className="w-full px-5 md:px-20 mt-3">
+        <DisplayEps filme={filme} />
       </section>
     </main>
   );
 };
 
-export default PaginaSerie;
+export default PaginaFilme;

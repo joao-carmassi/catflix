@@ -6,7 +6,7 @@ import { HTTP } from '@/service/axios';
 import { IFilme } from '@/interface/IFilme';
 import ContainerLoading from '@/components/ContainerLoading';
 import { notFound } from 'next/navigation';
-import CardFilme from '@/components/CardFilme/card-filmes';
+import CardDados from '@/components/CardDados';
 import slugify from 'slugify';
 
 const ContainerPesquisa = () => {
@@ -76,7 +76,7 @@ const ContainerPesquisa = () => {
     >
       {filmesFiltrados.length > 0 ? (
         filmesFiltrados.map((filme) => (
-          <CardFilme key={filme.dados.id} filme={filme} />
+          <CardDados key={filme.dados.id} filme={filme} />
         ))
       ) : (
         <p>Nenhum filme encontrado ;-;</p>

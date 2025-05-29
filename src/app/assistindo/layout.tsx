@@ -1,8 +1,8 @@
 import { Suspense } from 'react';
 
 export const metadata = {
-  title: 'Filme - Catflix',
-  description: 'Seus filmes prediletos na palma da sua mão',
+  title: 'Assistindo - Catflix',
+  description: 'Assistindo seus filmes prediletos onde quiser',
 };
 
 export default function RootLayout({

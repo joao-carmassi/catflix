@@ -3,6 +3,7 @@
 import { IFilme } from '@/interface/IFilme';
 import { ArrowBigLeftDash, ArrowBigRightDash } from 'lucide-react';
 import Link from 'next/link';
+import slugify from 'slugify';
 
 interface Props {
   filme: IFilme;
@@ -26,11 +27,13 @@ const DisplayFilme = ({ filme, temporada, ep }: Props) => {
       );
 
       if (temporadaAtual && episodio < temporadaAtual.episodios) {
-        return `/serie/?nome=the-last-of-us&temporada=${temp}&episodio=${
+        return `/assistindo/?nome=the-last-of-us&temporada=${temp}&episodio=${
           episodio + 1
         }`;
       } else if (temporadaSeguinte) {
-        return `/serie/?nome=the-last-of-us&temporada=${temp + 1}&episodio=1`;
+        return `/assistindo/?nome=the-last-of-us&temporada=${
+          temp + 1
+        }&episodio=1`;
       }
     }
     return false;
@@ -47,13 +50,13 @@ const DisplayFilme = ({ filme, temporada, ep }: Props) => {
       );
 
       if (episodio > 1) {
-        return `/serie/?nome=the-last-of-us&temporada=${temp}&episodio=${
+        return `/assistindo/?nome=the-last-of-us&temporada=${temp}&episodio=${
           episodio - 1
         }`;
       } else if (temporadaAnterior) {
-        return `/serie/?nome=the-last-of-us&temporada=${temp - 1}&episodio=${
-          temporadaAnterior.episodios
-        }`;
+        return `/assistindo/?nome=the-last-of-us&temporada=${
+          temp - 1
+        }&episodio=${temporadaAnterior.episodios}`;
       }
     }
     return false;
@@ -61,10 +64,13 @@ const DisplayFilme = ({ filme, temporada, ep }: Props) => {
 
   return (
     <div>
-      {!filme.tipo.filme && (
+      {!filme.tipo.filme ? (
         <div className="p-5 rounded-t-card bg-card flex justify-center flex-col gap-1">
           <Link
-            href={`/serie/?nome=${filme.nome}`}
+            href={`/sobre/?nome=${slugify(filme.nome, {
+              strict: true,
+              lower: true,
+            })}`}
             className="font-semibold text-card-foreground text-lg md:text-2xl"
           >
             {filme.nome}
@@ -73,6 +79,18 @@ const DisplayFilme = ({ filme, temporada, ep }: Props) => {
             <p className="md:text-lg text-gray-400">Temporada {temporada}</p>
             <p className="md:text-lg text-gray-400">Episodio {ep}</p>
           </div>
+        </div>
+      ) : (
+        <div className="p-5 rounded-t-card bg-card flex justify-center flex-col gap-1">
+          <Link
+            href={`/sobre/?nome=${slugify(filme.nome, {
+              strict: true,
+              lower: true,
+            })}`}
+            className="font-semibold text-card-foreground text-lg md:text-2xl"
+          >
+            {filme.nome}
+          </Link>
         </div>
       )}
       <video
