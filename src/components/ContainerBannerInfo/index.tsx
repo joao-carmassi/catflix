@@ -70,7 +70,7 @@ const ContainerBannerInfo = ({
             <Button
               onClick={() =>
                 router.push(
-                  `/filme?nome=${slugify(filme.nome, {
+                  `/assistindo?nome=${slugify(filme.nome, {
                     lower: true,
                     strict: true,
                   })}`
