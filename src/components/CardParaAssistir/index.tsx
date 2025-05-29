@@ -22,7 +22,7 @@ export default function CardParaAssistir({
       href={`/assistindo?nome=${slugify(`${filme.nome}`, {
         lower: true,
         strict: true,
-      })}&temporada=${temporada}&episodio=${ep}`}
+      })}${!filme.tipo.filme ? `&temporada=${temporada}&episodio=${ep}` : ''}`}
     >
       <Card
         className={`w-full max-w-xs shadow-none border ${

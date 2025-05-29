@@ -20,6 +20,10 @@ const localApi = axios.create({
 const dataFilmes = axios.create({
   baseURL: 'http://localhost:3001/',
 });
+// TODO: N esquece de arrumar
+// const dataFilmes = axios.create({
+//   baseURL: 'https://api-catflix.loca.lt',
+// });
 
 export const HTTP = {
   filmesApi,
