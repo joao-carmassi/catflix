@@ -43,7 +43,7 @@ const PaginaFilmes = () => {
 
   return (
     <main
-      className={`pt-18 min-h-screen pb-5 
+      className={`min-h-screen pb-5 
     transition-opacity duration-500
     ${loaded ? 'opacity-100' : 'opacity-0'}
   `}

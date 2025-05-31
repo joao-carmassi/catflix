@@ -5,13 +5,9 @@ import InputPesquisa from '../../components/InputBusca';
 import Form from './form';
 import { IFilme, IFilmeApi } from '@/interface/IFilme';
 
-const pesquisaFilme = (nome: string, filme = false) => {
+const pesquisaFilme = (nome: string) => {
   HTTP.filmesApi
-    .get(
-      `/search/${filme ? 'movie' : 'tv'}?query=${encodeURIComponent(
-        nome
-      )}&language=pt-BR`
-    )
+    .get(`/search/movie?query=${encodeURIComponent(nome)}&language=pt-BR`)
     .then((res) => {
       if (res.status !== 200) throw new Error('Erro ao baixa dados da api');
       const data: IFilmeApi[] = res.data.results;
@@ -26,7 +22,26 @@ const pesquisaFilme = (nome: string, filme = false) => {
         })
       );
     })
-    .catch((error) => console.error(error));
+    .catch((error) => console.error(error))
+    .finally(() => {
+      HTTP.filmesApi
+        .get(`/search/tv?query=${encodeURIComponent(nome)}&language=pt-BR`)
+        .then((res) => {
+          if (res.status !== 200) throw new Error('Erro ao baixa dados da api');
+          const data: IFilmeApi[] = res.data.results;
+          console.log(
+            data.map((item) => {
+              return {
+                title: item.title,
+                id: item.id,
+                data: item.release_date,
+                description: item.overview,
+              };
+            })
+          );
+        })
+        .catch((error) => console.error(error));
+    });
 };
 
 const verificaFilmeExiste = (id: string) => {
