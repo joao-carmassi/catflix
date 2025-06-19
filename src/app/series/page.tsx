@@ -2,33 +2,16 @@
 
 import ContainerFilmeSerie from '@/components/ContainerFilmeSerie';
 import ContainerLoading from '@/components/ContainerLoading';
+import { useAppContext } from '@/context';
 import { IFilme } from '@/interface/IFilme';
-import { HTTP } from '@/service/axios';
+
 import { notFound } from 'next/navigation';
 import { useEffect, useState } from 'react';
 
 const PaginaSeries = () => {
-  const [filmes, setFilmes] = useState<IFilme[] | null>(null);
-  const [loading, setLoading] = useState(true);
-  const [erro, setErro] = useState(false);
   const [loaded, setLoaded] = useState(false);
 
-  useEffect(() => {
-    HTTP.dataFilmes
-      .get('/data')
-      .then((res) => {
-        if (!res.data || res.data.length === 0) {
-          setErro(true);
-        } else {
-          setFilmes(res.data as IFilme[]);
-        }
-      })
-      .catch((err) => {
-        console.error(err);
-        setErro(true);
-      })
-      .finally(() => setLoading(false));
-  }, []);
+  const { filmes, loading, erro } = useAppContext();
 
   useEffect(() => {
     if (!loading) {

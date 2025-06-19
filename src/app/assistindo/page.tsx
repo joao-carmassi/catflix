@@ -1,7 +1,5 @@
 'use client';
 
-import { HTTP } from '@/service/axios';
-import { IFilme } from '@/interface/IFilme';
 import { notFound, useSearchParams } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import ContainerLoading from '@/components/ContainerLoading';
@@ -9,6 +7,7 @@ import slugify from 'slugify';
 import Home from '../(Homepage)/page';
 import DisplayFilme from '@/components/DisplayFilme';
 import DisplayEps from '@/components/DisplayEps';
+import { useAppContext } from '@/context';
 
 const PaginaSerie = () => {
   const searchParams = useSearchParams();
@@ -17,26 +16,8 @@ const PaginaSerie = () => {
   const episodio = searchParams.get('episodio');
 
   const [loaded, setLoaded] = useState(false);
-  const [erro, setErro] = useState(false);
-  const [filmes, setFilmes] = useState<IFilme[] | null>(null);
-  const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
-    HTTP.dataFilmes
-      .get('/data')
-      .then((res) => {
-        if (!res.data || res.data.length === 0) {
-          setErro(true);
-        } else {
-          setFilmes(res.data as IFilme[]);
-        }
-      })
-      .catch((err) => {
-        console.error(err);
-        setErro(true);
-      })
-      .finally(() => setLoading(false));
-  }, []);
+  const { filmes, loading, erro } = useAppContext();
 
   useEffect(() => {
     if (!loading) {
@@ -82,10 +63,7 @@ const PaginaSerie = () => {
     >
       <section className="w-full px-5 lg:px-20">
         {filme.tipo.filme ? (
-          <>
-            <DisplayFilme filme={filme} />
-            {/* <DisplayEps filme={filme} /> */}
-          </>
+          <DisplayFilme filme={filme} />
         ) : (
           <>
             <DisplayFilme

@@ -4,35 +4,14 @@ import { useEffect, useState } from 'react';
 import ContainerBannerInfo from '../../components/ContainerBannerInfo';
 import ContainerCard from './ContainerCards';
 import ContainerLoading from '@/components/ContainerLoading';
-import { HTTP } from '@/service/axios';
-import { IFilme } from '@/interface/IFilme';
 import { notFound } from 'next/navigation';
+import { useAppContext } from '@/context';
 
 export default function Home() {
-  const [filmes, setFilmes] = useState<IFilme[] | null>(null);
-  const [loading, setLoading] = useState(true);
-  const [erro, setErro] = useState(false);
   const [loaded, setLoaded] = useState(false);
   const [random, setRandom] = useState(0);
 
-  useEffect(() => {
-    HTTP.dataFilmes
-      .get('/data')
-      .then((res) => {
-        if (!res.data || res.data.length === 0) {
-          setErro(true);
-        } else {
-          setFilmes(res.data as IFilme[]);
-        }
-      })
-      .catch((err) => {
-        console.error(err);
-        setErro(true);
-      })
-      .finally(() => {
-        setLoading(false);
-      });
-  }, []);
+  const { filmes, loading, erro } = useAppContext();
 
   useEffect(() => {
     if (filmes && filmes.length > 0) {

@@ -27,13 +27,11 @@ const DisplayFilme = ({ filme, temporada, ep }: Props) => {
       );
 
       if (temporadaAtual && episodio < temporadaAtual.episodios) {
-        return `/assistindo/?nome=the-last-of-us&temporada=${temp}&episodio=${
+        return `/assistindo/?nome=${filme}&temporada=${temp}&episodio=${
           episodio + 1
         }`;
       } else if (temporadaSeguinte) {
-        return `/assistindo/?nome=the-last-of-us&temporada=${
-          temp + 1
-        }&episodio=1`;
+        return `/assistindo/?nome=${filme}&temporada=${temp + 1}&episodio=1`;
       }
     }
     return false;
@@ -50,13 +48,13 @@ const DisplayFilme = ({ filme, temporada, ep }: Props) => {
       );
 
       if (episodio > 1) {
-        return `/assistindo/?nome=the-last-of-us&temporada=${temp}&episodio=${
+        return `/assistindo/?nome=${filme}&temporada=${temp}&episodio=${
           episodio - 1
         }`;
       } else if (temporadaAnterior) {
-        return `/assistindo/?nome=the-last-of-us&temporada=${
-          temp - 1
-        }&episodio=${temporadaAnterior.episodios}`;
+        return `/assistindo/?nome=${filme}&temporada=${temp - 1}&episodio=${
+          temporadaAnterior.episodios
+        }`;
       }
     }
     return false;
@@ -100,14 +98,14 @@ const DisplayFilme = ({ filme, temporada, ep }: Props) => {
       >
         <source
           src={`https://server-catflix.loca.lt/${filme?.caminho}${
-            !filme.tipo.filme ? `/${temporada}/${ep}.mkv` : ''
+            !filme.tipo.filme ? `/${temporada}/${ep}.${filme.formato}` : ''
           }`}
           type="video/webm"
         />
         Download the
         <a
           href={`https://server-catflix.loca.lt/${filme?.caminho}${
-            !filme.tipo.filme ? `/${temporada}/${ep}.mkv` : ''
+            !filme.tipo.filme ? `/${temporada}/${ep}.${filme.formato}` : ''
           }`}
         >
           WEBM

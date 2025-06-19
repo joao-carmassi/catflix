@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import './globals.css';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
+import AppProvider from '@/context';
 
 export const metadata: Metadata = {
   title: 'Catflix',
@@ -15,15 +16,16 @@ export default function RootLayout({
 }>) {
   /* TODO: Afazeres
     ! Melhorar componentes pfvr, ta mt ruim
-    * Melhorar pagina pesquisa e nav
   */
 
   return (
     <html lang="pt-BR">
       <body className="dark">
-        <Navbar />
-        {children}
-        <Footer />
+        <AppProvider>
+          <Navbar />
+          {children}
+          <Footer />
+        </AppProvider>
       </body>
     </html>
   );

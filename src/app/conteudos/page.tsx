@@ -8,7 +8,7 @@ import { IFilme } from '@/interface/IFilme';
 import { notFound } from 'next/navigation';
 import { useEffect, useState } from 'react';
 
-const PaginaFilmes = () => {
+const PaginaConteudos = () => {
   const [loaded, setLoaded] = useState(false);
 
   const { filmes, loading, erro } = useAppContext();
@@ -22,7 +22,7 @@ const PaginaFilmes = () => {
   if (loading) return <ContainerLoading />;
   if (erro) return notFound();
 
-  const filmesFiltrados = filmes?.filter((filme) => filme.tipo.filme);
+  const filmesFiltrados = filmes;
 
   return (
     <main
@@ -38,4 +38,4 @@ const PaginaFilmes = () => {
   );
 };
 
-export default PaginaFilmes;
+export default PaginaConteudos;

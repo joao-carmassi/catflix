@@ -2,12 +2,19 @@
 
 import Link from 'next/link';
 import { useState, useEffect } from 'react';
-import InputPesquisa from '../InputBusca';
-import { useRouter } from 'next/navigation';
+import { Button } from '../ui/button';
+import {
+  Sheet,
+  SheetContent,
+  SheetDescription,
+  SheetHeader,
+  SheetTitle,
+  SheetTrigger,
+} from '../ui/sheet';
+import { Menu } from 'lucide-react';
 
 const Navbar = () => {
   const [scroll, setScroll] = useState(false);
-  const router = useRouter();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -21,10 +28,6 @@ const Navbar = () => {
       window.removeEventListener('scroll', handleScroll);
     };
   }, []);
-
-  const pesquisa = (path: string) => {
-    router.push(`/filmes?nome=${path}`);
-  };
 
   const [loaded, setLoaded] = useState(false);
   useEffect(() => {
@@ -57,8 +60,53 @@ const Navbar = () => {
             Catflix
           </Link>
         </div>
-        <div className="flex-1 flex items-center justify-end">
-          <InputPesquisa funcao={pesquisa} />
+        <div className="flex-1 hidden md:flex items-center justify-end">
+          <Button className="hover:no-underline" variant={'link'} asChild>
+            <Link href={'/conteudos'}>Conteudos</Link>
+          </Button>
+          <Button className="hover:no-underline" variant={'link'} asChild>
+            <Link href={'/filmes'}>Filmes</Link>
+          </Button>
+          <Button className="hover:no-underline" variant={'link'} asChild>
+            <Link href={'/series'}>Series</Link>
+          </Button>
+        </div>
+        <div className="flex-1 flex md:hidden items-center justify-end">
+          <Sheet>
+            <SheetTrigger>
+              <div className="text-background bg-foreground p-1 rounded-md hover:bg-foreground/80">
+                <Menu />
+              </div>
+            </SheetTrigger>
+            <SheetContent>
+              <SheetHeader>
+                <SheetTitle className="hidden">Links</SheetTitle>
+                <SheetDescription className="flex flex-col gap-2 items-start">
+                  <Button
+                    className="hover:no-underline"
+                    variant={'link'}
+                    asChild
+                  >
+                    <Link href={'/conteudos'}>Conteudos</Link>
+                  </Button>
+                  <Button
+                    className="hover:no-underline"
+                    variant={'link'}
+                    asChild
+                  >
+                    <Link href={'/filmes'}>Filmes</Link>
+                  </Button>
+                  <Button
+                    className="hover:no-underline"
+                    variant={'link'}
+                    asChild
+                  >
+                    <Link href={'/series'}>Series</Link>
+                  </Button>
+                </SheetDescription>
+              </SheetHeader>
+            </SheetContent>
+          </Sheet>
         </div>
       </nav>
     </header>

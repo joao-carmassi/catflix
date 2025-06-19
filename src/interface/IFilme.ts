@@ -33,6 +33,8 @@ export interface IFilmeApi {
 
 export interface IFilme {
   nome: string;
+  caminho: string;
+  formato: 'mkv' | 'mp4';
   tipo: {
     filme: boolean;
     temporadas: {
@@ -40,6 +42,5 @@ export interface IFilme {
       episodios: number;
     }[];
   };
-  caminho: string;
   dados: IFilmeApi;
 }

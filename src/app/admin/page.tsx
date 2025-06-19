@@ -60,6 +60,7 @@ const salvaFilme = async (
       id: string;
       tipo: string;
       caminho: string;
+      formato: string;
     }>
   >
 ) => {
@@ -94,6 +95,7 @@ const salvaFilme = async (
         id: '',
         tipo: 'filme',
         caminho: '',
+        formato: 'mkv',
       });
     })
     .catch((error) => console.error(error));

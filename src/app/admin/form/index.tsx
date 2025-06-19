@@ -13,6 +13,7 @@ interface Props {
         id: string;
         tipo: string;
         caminho: string;
+        formato: string;
       }>
     >
   ) => void;
@@ -24,6 +25,7 @@ const Form = ({ salvaFilme }: Props) => {
     id: '',
     tipo: 'filme',
     caminho: '',
+    formato: 'mkv',
   });
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -69,6 +71,23 @@ const Form = ({ salvaFilme }: Props) => {
         <div className="flex items-center space-x-2">
           <RadioGroupItem value="serie" id="serie" />
           <Label htmlFor="serie">Serie</Label>
+        </div>
+      </RadioGroup>
+      <RadioGroup
+        defaultValue="mkv"
+        value={form.formato}
+        onValueChange={(value) =>
+          setForm((prev) => ({ ...prev, formato: value }))
+        }
+        className="flex items-center gap-3"
+      >
+        <div className="flex items-center space-x-2">
+          <RadioGroupItem value="mkv" id="mkv" />
+          <Label htmlFor="mkv">mkv</Label>
+        </div>
+        <div className="flex items-center space-x-2">
+          <RadioGroupItem value="mp4" id="mp4" />
+          <Label htmlFor="mp4">mp4</Label>
         </div>
       </RadioGroup>
       <Button variant="outline">Enviar</Button>
